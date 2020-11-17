@@ -8,5 +8,6 @@ namespace BaiTapLon_QuanLyLinhKien.ConnectDatabase
 {
     class clsConnectDB
     {
+        
     }
 }
