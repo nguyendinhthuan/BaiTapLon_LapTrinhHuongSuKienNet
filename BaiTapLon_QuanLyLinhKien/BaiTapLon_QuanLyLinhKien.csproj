@@ -62,6 +62,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ClassThangTest.cs" />
     <Compile Include="ConnectDatabase\clsConnectDB.cs" />
     <Compile Include="Model\clsPhanQuyen.cs" />
     <Compile Include="View\Form1.cs">
