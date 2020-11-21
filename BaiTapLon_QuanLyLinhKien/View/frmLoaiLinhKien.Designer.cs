@@ -154,7 +154,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(685, 34);
             this.label1.TabIndex = 6;
-            this.label1.Text = "DANH MỤC CHẤT LIỆU";
+            this.label1.Text = "DANH MỤC LINH KIỆN";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // frmLoaiLinhKien

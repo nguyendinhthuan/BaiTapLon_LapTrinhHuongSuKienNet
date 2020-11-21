@@ -19,7 +19,7 @@ namespace BaiTapLon_QuanLyLinhKien.View
         {
             InitializeComponent();
         }
-        DataTable tblH;
+        DataTable tblH = new DataTable();
         private void frmDanhMucLinhKien_Load(object sender, EventArgs e)
         {
             string sql;
