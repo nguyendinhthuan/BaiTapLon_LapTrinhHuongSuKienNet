@@ -13,10 +13,10 @@ namespace BaiTapLon_QuanLyLinhKien.ConnectDatabase
     {
         public static SqlConnection Con;  //Khai báo đối tượng kết nối        
 
-        public void Connect()
+        public static void Connect()
         {
             Con = new SqlConnection();   //Khởi tạo đối tượng
-            Con.ConnectionString = @"Data Source=DESKTOP-LS4LJR0\SQLEXPRESS;Initial Catalog=QuanLyLinhKien;Integrated Security=True";
+            Con.ConnectionString = @"Data Source=LAPTOP-A77BJ5G6\SQLEXPRESS;Initial Catalog=QuanLyLinhKien;Integrated Security=True";
             Con.Open();                  //Mở kết nối
             //Kiểm tra kết nối
             if (Con.State == ConnectionState.Open)
@@ -55,15 +55,16 @@ namespace BaiTapLon_QuanLyLinhKien.ConnectDatabase
         }
         public static DataTable GetDataToTable(string sql)
         {
-            SqlDataAdapter dap = new SqlDataAdapter(); //Định nghĩa đối tượng thuộc lớp SqlDataAdapter
-            //Tạo đối tượng thuộc lớp SqlCommand
-            dap.SelectCommand = new SqlCommand();
-            dap.SelectCommand.Connection = clsConnectDB.Con; //Kết nối cơ sở dữ liệu
-            dap.SelectCommand.CommandText = sql; //Lệnh SQL
-            //Khai báo đối tượng table thuộc lớp DataTable
-            DataTable table = new DataTable();
-            dap.Fill(table);
-            return table;
+            using (SqlCommand cmd = new SqlCommand(sql))
+            {
+                cmd.Connection = clsConnectDB.Con;
+                using (SqlDataAdapter sda = new SqlDataAdapter(cmd))
+                {
+                    DataTable dt = new DataTable();
+                    sda.Fill(dt);
+                    return dt;
+                }
+            }
         }
         public static bool CheckKey(string sql)
         {

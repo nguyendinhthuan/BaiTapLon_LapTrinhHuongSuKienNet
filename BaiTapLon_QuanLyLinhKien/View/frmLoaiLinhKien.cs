@@ -24,52 +24,35 @@ namespace BaiTapLon_QuanLyLinhKien.View
             txtMaLinhKien.Enabled = false;
             btnLuu.Enabled = false;
             btnBoQua.Enabled = false;
+            btnSua.Enabled = false;
+            btnXoa.Enabled = false;
             LoadDataGridView();
         }
         private void LoadDataGridView()
         {
             string sql;
-            sql = "SELECT MaLinhKien, TenLinhKien FROM tblLoaiChatLieu";
+            sql = "SELECT maLoaiLinhKien, tenLoaiLinhKien FROM tblLoaiLinhKien";
+            clsConnectDB.Connect();
             tblLLK = clsConnectDB.GetDataToTable(sql); //Đọc dữ liệu từ bảng
             dgvLoaiLinhKien.DataSource = tblLLK; //Nguồn dữ liệu            
-            dgvLoaiLinhKien.Columns[0].HeaderText = "Mã chất liệu";
-            dgvLoaiLinhKien.Columns[1].HeaderText = "Mã chất liệu";
+            dgvLoaiLinhKien.Columns[0].HeaderText = "Mã";
+            dgvLoaiLinhKien.Columns[1].HeaderText = "Tên";
             dgvLoaiLinhKien.Columns[0].Width = 100;
             dgvLoaiLinhKien.Columns[1].Width = 300;
             dgvLoaiLinhKien.AllowUserToAddRows = false; //Không cho người dùng thêm dữ liệu trực tiếp
             dgvLoaiLinhKien.EditMode = DataGridViewEditMode.EditProgrammatically; //Không cho sửa dữ liệu trực tiếp
         }
 
-        private void dgvLoaiLinhKien_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (btnThem.Enabled == false)
-            {
-                MessageBox.Show("Đang ở chế độ thêm mới!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                txtMaLinhKien.Focus();
-                return;
-            }
-            if (tblLLK.Rows.Count == 0) //Nếu không có dữ liệu
-            {
-                MessageBox.Show("Không có dữ liệu!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return;
-            }
-            txtMaLinhKien.Text = dgvLoaiLinhKien.CurrentRow.Cells["MaChatLieu"].Value.ToString();
-            txtTenLinhKien.Text = dgvLoaiLinhKien.CurrentRow.Cells["TenChatLieu"].Value.ToString();
-            btnSua.Enabled = true;
-            btnXoa.Enabled = true;
-            btnBoQua.Enabled = true;
-        }
-
         private void btnThem_Click(object sender, EventArgs e)
         {
+            txtMaLinhKien.Enabled = true; //cho phép nhập mới
+            txtMaLinhKien.Focus();
             btnSua.Enabled = false;
             btnXoa.Enabled = false;
             btnBoQua.Enabled = true;
             btnLuu.Enabled = true;
             btnThem.Enabled = false;
             ResetValue(); //Xoá trắng các textbox
-            txtMaLinhKien.Enabled = true; //cho phép nhập mới
-            txtTenLinhKien.Focus();
         }
         private void ResetValue()
         {
@@ -82,20 +65,20 @@ namespace BaiTapLon_QuanLyLinhKien.View
             string sql; //Lưu lệnh sql
             if (txtMaLinhKien.Text.Trim().Length == 0) //Nếu chưa nhập mã chất liệu
             {
-                MessageBox.Show("Bạn phải nhập mã chất liệu", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Bạn phải nhập mã loại linh kiện", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 txtMaLinhKien.Focus();
                 return;
             }
             if (txtTenLinhKien.Text.Trim().Length == 0) //Nếu chưa nhập tên chất liệu
             {
-                MessageBox.Show("Bạn phải nhập tên chất liệu", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Bạn phải nhập tên loại linh kiện", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 txtTenLinhKien.Focus();
                 return;
             }
-            sql = "Select MaChatLieu From tblChatLieu where MaChatLieu=N'" + txtMaLinhKien.Text.Trim() + "'";
+            sql = "Select maLoaiLinhKien From tblLoaiLinhKien where maLoaiLinhKien = N'" + txtMaLinhKien.Text.Trim() + "'";
             if (clsConnectDB.CheckKey(sql))
             {
-                MessageBox.Show("Mã chất liệu này đã có, bạn phải nhập mã khác", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Mã loại linh kiện này đã tồn tại, bạn phải nhập mã khác", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 txtMaLinhKien.Focus();
                 return;
             }
@@ -105,9 +88,9 @@ namespace BaiTapLon_QuanLyLinhKien.View
             clsConnectDB.RunSQL(sql); //Thực hiện câu lệnh sql
             LoadDataGridView(); //Nạp lại DataGridView
             ResetValue();
-            btnXoa.Enabled = true;
             btnThem.Enabled = true;
-            btnSua.Enabled = true;
+            btnSua.Enabled = false;
+            btnXoa.Enabled = false;
             btnBoQua.Enabled = false;
             btnLuu.Enabled = false;
             txtMaLinhKien.Enabled = false;
@@ -128,17 +111,19 @@ namespace BaiTapLon_QuanLyLinhKien.View
             }
             if (txtTenLinhKien.Text.Trim().Length == 0) //nếu chưa nhập tên chất liệu
             {
-                MessageBox.Show("Bạn chưa nhập tên chất liệu", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Bạn chưa nhập tên loại linh kiện", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
             sql = "UPDATE tblLoaiLinhKien SET tenLoaiLinhKien=N'" +
-                txtMaLinhKien.Text.ToString() +
-                "' WHERE maLoaiLinhKien=N'" + txtTenLinhKien.Text + "'";
+                txtTenLinhKien.Text.ToString() +
+                "' WHERE maLoaiLinhKien=N'" + txtMaLinhKien.Text + "'";
             clsConnectDB.RunSQL(sql);
             LoadDataGridView();
             ResetValue();
 
             btnBoQua.Enabled = false;
+            btnSua.Enabled = false;
+            btnXoa.Enabled = false;
         }
 
         private void btnXoa_Click(object sender, EventArgs e)
@@ -160,6 +145,8 @@ namespace BaiTapLon_QuanLyLinhKien.View
                 clsConnectDB.RunSqlDel(sql);
                 LoadDataGridView();
                 ResetValue();
+                btnSua.Enabled = false;
+                btnXoa.Enabled = false;
             }
         }
 
@@ -182,6 +169,26 @@ namespace BaiTapLon_QuanLyLinhKien.View
         private void btnDong_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void dgvLoaiLinhKien_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (btnThem.Enabled == false)
+            {
+                MessageBox.Show("Đang ở chế độ thêm mới!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                txtMaLinhKien.Focus();
+                return;
+            }
+            if (tblLLK.Rows.Count == 0) //Nếu không có dữ liệu
+            {
+                MessageBox.Show("Không có dữ liệu!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+            txtMaLinhKien.Text = dgvLoaiLinhKien.CurrentRow.Cells["maLoaiLinhKien"].Value.ToString();
+            txtTenLinhKien.Text = dgvLoaiLinhKien.CurrentRow.Cells["tenLoaiLinhKien"].Value.ToString();
+            btnSua.Enabled = true;
+            btnXoa.Enabled = true;
+            btnBoQua.Enabled = true;
         }
     }
 }

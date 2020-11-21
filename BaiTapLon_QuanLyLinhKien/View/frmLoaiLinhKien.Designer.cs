@@ -45,7 +45,7 @@
             // 
             // btnDong
             // 
-            this.btnDong.Location = new System.Drawing.Point(583, 371);
+            this.btnDong.Location = new System.Drawing.Point(298, 374);
             this.btnDong.Name = "btnDong";
             this.btnDong.Size = new System.Drawing.Size(94, 35);
             this.btnDong.TabIndex = 12;
@@ -55,7 +55,7 @@
             // 
             // btnBoQua
             // 
-            this.btnBoQua.Location = new System.Drawing.Point(470, 371);
+            this.btnBoQua.Location = new System.Drawing.Point(175, 374);
             this.btnBoQua.Name = "btnBoQua";
             this.btnBoQua.Size = new System.Drawing.Size(94, 35);
             this.btnBoQua.TabIndex = 13;
@@ -65,7 +65,7 @@
             // 
             // btnLuu
             // 
-            this.btnLuu.Location = new System.Drawing.Point(353, 370);
+            this.btnLuu.Location = new System.Drawing.Point(52, 374);
             this.btnLuu.Name = "btnLuu";
             this.btnLuu.Size = new System.Drawing.Size(94, 35);
             this.btnLuu.TabIndex = 14;
@@ -75,7 +75,7 @@
             // 
             // btnSua
             // 
-            this.btnSua.Location = new System.Drawing.Point(244, 371);
+            this.btnSua.Location = new System.Drawing.Point(545, 281);
             this.btnSua.Name = "btnSua";
             this.btnSua.Size = new System.Drawing.Size(94, 35);
             this.btnSua.TabIndex = 15;
@@ -85,7 +85,7 @@
             // 
             // btnXoa
             // 
-            this.btnXoa.Location = new System.Drawing.Point(133, 371);
+            this.btnXoa.Location = new System.Drawing.Point(545, 228);
             this.btnXoa.Name = "btnXoa";
             this.btnXoa.Size = new System.Drawing.Size(94, 35);
             this.btnXoa.TabIndex = 16;
@@ -95,7 +95,7 @@
             // 
             // btnThem
             // 
-            this.btnThem.Location = new System.Drawing.Point(19, 371);
+            this.btnThem.Location = new System.Drawing.Point(545, 175);
             this.btnThem.Name = "btnThem";
             this.btnThem.Size = new System.Drawing.Size(94, 35);
             this.btnThem.TabIndex = 17;
@@ -108,20 +108,20 @@
             this.dgvLoaiLinhKien.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvLoaiLinhKien.Location = new System.Drawing.Point(52, 175);
             this.dgvLoaiLinhKien.Name = "dgvLoaiLinhKien";
-            this.dgvLoaiLinhKien.Size = new System.Drawing.Size(600, 189);
+            this.dgvLoaiLinhKien.Size = new System.Drawing.Size(443, 189);
             this.dgvLoaiLinhKien.TabIndex = 11;
-            this.dgvLoaiLinhKien.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvLoaiLinhKien_CellContentClick);
+            this.dgvLoaiLinhKien.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvLoaiLinhKien_CellClick);
             // 
             // txtTenLinhKien
             // 
-            this.txtTenLinhKien.Location = new System.Drawing.Point(166, 116);
+            this.txtTenLinhKien.Location = new System.Drawing.Point(176, 116);
             this.txtTenLinhKien.Name = "txtTenLinhKien";
             this.txtTenLinhKien.Size = new System.Drawing.Size(259, 26);
             this.txtTenLinhKien.TabIndex = 9;
             // 
             // txtMaLinhKien
             // 
-            this.txtMaLinhKien.Location = new System.Drawing.Point(166, 64);
+            this.txtMaLinhKien.Location = new System.Drawing.Point(176, 64);
             this.txtMaLinhKien.Name = "txtMaLinhKien";
             this.txtMaLinhKien.Size = new System.Drawing.Size(259, 26);
             this.txtMaLinhKien.TabIndex = 10;
@@ -131,30 +131,29 @@
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(48, 122);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(97, 20);
+            this.label3.Size = new System.Drawing.Size(125, 20);
             this.label3.TabIndex = 7;
-            this.label3.Text = "Tên linh kiện";
+            this.label3.Text = "Tên loại linh kiện";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(48, 65);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(92, 20);
+            this.label2.Size = new System.Drawing.Size(120, 20);
             this.label2.TabIndex = 8;
-            this.label2.Text = "Mã linh kiện";
+            this.label2.Text = "Mã loại linh kiện";
             // 
             // label1
             // 
-            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label1.Dock = System.Windows.Forms.DockStyle.Top;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.Blue;
-            this.label1.Location = new System.Drawing.Point(0, -1);
+            this.label1.Location = new System.Drawing.Point(0, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(685, 34);
+            this.label1.Size = new System.Drawing.Size(684, 34);
             this.label1.TabIndex = 6;
-            this.label1.Text = "DANH MỤC LINH KIỆN";
+            this.label1.Text = "LOẠI LINH KIỆN";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // frmLoaiLinhKien
