@@ -1,6 +1,6 @@
 ﻿namespace BaiTapLon_QuanLyLinhKien.View
 {
-    partial class frmTimKiemLinhKienBan
+    partial class frmTimKiemHoaDon
     {
         /// <summary>
         /// Required designer variable.

@@ -12,9 +12,9 @@ using BaiTapLon_QuanLyLinhKien.ConnectDatabase;
 
 namespace BaiTapLon_QuanLyLinhKien.View
 {
-    public partial class frmTimKiemLinhKienBan : Form
+    public partial class frmTimKiemHoaDon : Form
     {
-        public frmTimKiemLinhKienBan()
+        public frmTimKiemHoaDon()
         {
             InitializeComponent();
         }
