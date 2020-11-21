@@ -32,7 +32,6 @@ namespace BaiTapLon_QuanLyLinhKien.View
         {
             string sql;
             sql = "SELECT maLoaiLinhKien, tenLoaiLinhKien FROM tblLoaiLinhKien";
-            clsConnectDB.Connect();
             tblLLK = clsConnectDB.GetDataToTable(sql); //Đọc dữ liệu từ bảng
             dgvLoaiLinhKien.DataSource = tblLLK; //Nguồn dữ liệu            
             dgvLoaiLinhKien.Columns[0].HeaderText = "Mã";

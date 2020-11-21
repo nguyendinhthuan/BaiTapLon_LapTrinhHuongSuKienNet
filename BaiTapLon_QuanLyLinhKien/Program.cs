@@ -16,7 +16,7 @@ namespace BaiTapLon_QuanLyLinhKien
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new View.frmLoaiLinhKien());
+            Application.Run(new View.frmHoaDon());
         }
     }
 }

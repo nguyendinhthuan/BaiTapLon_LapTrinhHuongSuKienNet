@@ -1,6 +1,6 @@
 ﻿namespace BaiTapLon_QuanLyLinhKien.View
 {
-    partial class frmDanhMucLinhKien
+    partial class frmLinhKien
     {
         /// <summary>
         /// Required designer variable.
@@ -301,18 +301,17 @@
             // 
             // label1
             // 
-            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label1.Dock = System.Windows.Forms.DockStyle.Top;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.Blue;
-            this.label1.Location = new System.Drawing.Point(-1, -2);
+            this.label1.Location = new System.Drawing.Point(0, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(634, 34);
+            this.label1.Size = new System.Drawing.Size(920, 34);
             this.label1.TabIndex = 10;
-            this.label1.Text = "DANH MỤC LINH KIỆN";
+            this.label1.Text = "LINH KIỆN";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // frmDanhMucLinhKien
+            // frmLinhKien
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -347,7 +346,7 @@
             this.Controls.Add(this.label1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.Name = "frmDanhMucLinhKien";
+            this.Name = "frmLinhKien";
             this.Text = "frmDanhMucLinhKien";
             this.Load += new System.EventHandler(this.frmDanhMucLinhKien_Load);
             ((System.ComponentModel.ISupportInitialize)(this.picAnh)).EndInit();

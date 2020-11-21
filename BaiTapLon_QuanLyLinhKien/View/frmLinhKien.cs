@@ -13,9 +13,9 @@ using BaiTapLon_QuanLyLinhKien.ConnectDatabase;
 
 namespace BaiTapLon_QuanLyLinhKien.View
 {
-    public partial class frmDanhMucLinhKien : Form
+    public partial class frmLinhKien : Form
     {
-        public frmDanhMucLinhKien()
+        public frmLinhKien()
         {
             InitializeComponent();
         }

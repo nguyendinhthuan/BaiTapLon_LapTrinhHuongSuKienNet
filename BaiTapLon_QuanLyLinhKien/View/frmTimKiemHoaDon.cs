@@ -106,10 +106,10 @@ namespace BaiTapLon_QuanLyLinhKien.View
             if (MessageBox.Show("Bạn có muốn hiển thị thông tin chi tiết?", "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 mahd = dgvTimKiemHoaDon.CurrentRow.Cells["MaHDBan"].Value.ToString();
-                //frmHoaDon frm = new frmHoaDon();
+                frmHoaDon frm = new frmHoaDon();
                 //frm.txtMaHoaDon.Text = mahd;
-                //frm.StartPosition = FormStartPosition.CenterParent;
-                //frm.ShowDialog();
+                frm.StartPosition = FormStartPosition.CenterParent;
+                frm.ShowDialog();
             }
         }
     }
