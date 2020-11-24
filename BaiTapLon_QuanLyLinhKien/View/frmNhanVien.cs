@@ -22,17 +22,17 @@ namespace BaiTapLon_QuanLyLinhKien.View
         public void LoadDataGridView()
         {
             string sql;
-            sql = "SELECT MaNhanVien,TenNhanVien,GioiTinh,DiaChi,DienThoai,NgaySinh FROm tblNhanVien";
+            sql = "SELECT maNhanVien,tenNhanVien,diaChi,soDienThoai FROm tblNhanVien";
             tblNV = clsConnectDB.GetDataToTable(sql); //lấy dữ liệu
             dgvNhanVien.DataSource = tblNV;
             dgvNhanVien.Columns[0].HeaderText = "Mã nhân viên";
             dgvNhanVien.Columns[1].HeaderText = "Tên nhân viên";
             dgvNhanVien.Columns[2].HeaderText = "Địa chỉ";
             dgvNhanVien.Columns[3].HeaderText = "Điện thoại";
-            dgvNhanVien.Columns[0].Width = 100;
-            dgvNhanVien.Columns[1].Width = 150;
-            dgvNhanVien.Columns[2].Width = 100;
-            dgvNhanVien.Columns[3].Width = 150;
+            dgvNhanVien.Columns[0].Width = 200;
+            dgvNhanVien.Columns[1].Width = 200;
+            dgvNhanVien.Columns[2].Width = 200;
+            dgvNhanVien.Columns[3].Width = 230;
             dgvNhanVien.AllowUserToAddRows = false;
             dgvNhanVien.EditMode = DataGridViewEditMode.EditProgrammatically;
         }
@@ -50,10 +50,10 @@ namespace BaiTapLon_QuanLyLinhKien.View
                 MessageBox.Show("Không có dữ liệu!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
-            txtMaNhanVien.Text = dgvNhanVien.CurrentRow.Cells["MaNhanVien"].Value.ToString();
-            txtTenNhanVien.Text = dgvNhanVien.CurrentRow.Cells["TenNhanVien"].Value.ToString();
-            txtDiaChiNhanVien.Text = dgvNhanVien.CurrentRow.Cells["DiaChi"].Value.ToString();
-            txtSDTNhanVien.Text = dgvNhanVien.CurrentRow.Cells["DienThoai"].Value.ToString();
+            txtMaNhanVien.Text = dgvNhanVien.CurrentRow.Cells["maNhanVien"].Value.ToString();
+            txtTenNhanVien.Text = dgvNhanVien.CurrentRow.Cells["tenNhanVien"].Value.ToString();
+            txtDiaChiNhanVien.Text = dgvNhanVien.CurrentRow.Cells["diaChi"].Value.ToString();
+            txtSDTNhanVien.Text = dgvNhanVien.CurrentRow.Cells["soDienThoai"].Value.ToString();
             btnSua.Enabled = true;
             btnXoa.Enabled = true;
             btnXoa.Enabled = true;
@@ -67,8 +67,6 @@ namespace BaiTapLon_QuanLyLinhKien.View
             btnLuu.Enabled = true;
             btnThem.Enabled = false;
             ResetValues();
-            txtMaNhanVien.Enabled = true;
-            txtMaNhanVien.Focus();
         }
         private void ResetValues()
         {
@@ -81,12 +79,12 @@ namespace BaiTapLon_QuanLyLinhKien.View
         private void btnLuu_Click(object sender, EventArgs e)
         {
             string sql, gt;
-            if (txtMaNhanVien.Text.Trim().Length == 0)
+            /*if (txtMaNhanVien.Text.Trim().Length == 0)
             {
                 MessageBox.Show("Bạn phải nhập mã nhân viên", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 txtMaNhanVien.Focus();
                 return;
-            }
+            }*/
             if (txtTenNhanVien.Text.Trim().Length == 0)
             {
                 MessageBox.Show("Bạn phải nhập tên nhân viên", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -105,7 +103,7 @@ namespace BaiTapLon_QuanLyLinhKien.View
                 txtSDTNhanVien.Focus();
                 return;
             }
-            sql = "SELECT MaNhanVien FROM tblNhanVien WHERE MaNhanVien=N'" + txtMaNhanVien.Text.Trim() + "'";
+            sql = "SELECT maNhanVien FROM tblNhanVien WHERE maNhanVien=N'" + txtMaNhanVien.Text.Trim() + "'";
             if (clsConnectDB.CheckKey(sql))
             {
                 MessageBox.Show("Mã nhân viên này đã có, bạn phải nhập mã khác", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -113,7 +111,7 @@ namespace BaiTapLon_QuanLyLinhKien.View
                 txtMaNhanVien.Text = "";
                 return;
             }
-            sql = "INSERT INTO tblNhanVien(MaNhanVien,TenNhanVien, DiaChi,DienThoai) VALUES (N'" + txtMaNhanVien.Text.Trim() + "',N'" + txtTenNhanVien.Text.Trim() + "',N'" + txtDiaChiNhanVien.Text.Trim() + "','" + txtSDTNhanVien.Text + "')";
+            sql = "INSERT INTO tblNhanVien(tenNhanVien, diaChi,soDienThoai) VALUES (N'" + txtTenNhanVien.Text.Trim() + "',N'" + txtDiaChiNhanVien.Text.Trim() + "','" + txtSDTNhanVien.Text + "')";
             clsConnectDB.RunSQL(sql);
             LoadDataGridView();
             ResetValues();
@@ -147,7 +145,7 @@ namespace BaiTapLon_QuanLyLinhKien.View
             if (txtDiaChiNhanVien.Text.Trim().Length == 0)
             {
                 MessageBox.Show("Bạn phải nhập địa chỉ", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                 txtDiaChiNhanVien.Focus();
+                txtDiaChiNhanVien.Focus();
                 return;
             }
             if (txtSDTNhanVien.Text == "(   )     -")
@@ -156,10 +154,10 @@ namespace BaiTapLon_QuanLyLinhKien.View
                 txtSDTNhanVien.Focus();
                 return;
             }
-            sql = "UPDATE tblNhanVien SET  TenNhanVien=N'" + txtTenNhanVien.Text.Trim().ToString() +
-                    "',DiaChi=N'" + txtDiaChiNhanVien.Text.Trim().ToString() +
-                    "',DienThoai='" + txtSDTNhanVien.Text.ToString() +
-                    "' WHERE MaNhanVien=N'" + txtMaNhanVien.Text + "'";
+            sql = "UPDATE tblNhanVien SET  tenNhanVien=N'" + txtTenNhanVien.Text.Trim().ToString() +
+                    "',diaChi=N'" + txtDiaChiNhanVien.Text.Trim().ToString() +
+                    "',soDienThoai='" + txtSDTNhanVien.Text.ToString() +
+                    "' WHERE maNhanVien=N'" + txtMaNhanVien.Text + "'";
             clsConnectDB.RunSQL(sql);
             LoadDataGridView();
             ResetValues();
@@ -181,7 +179,7 @@ namespace BaiTapLon_QuanLyLinhKien.View
             }
             if (MessageBox.Show("Bạn có muốn xóa không?", "Thông báo", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
             {
-                sql = "DELETE tblNhanVien WHERE MaNhanVien=N'" + txtMaNhanVien.Text + "'";
+                sql = "DELETE FROM tblNhanVien WHERE maNhanVien=" + txtMaNhanVien.Text + "";
                 clsConnectDB.RunSqlDel(sql);
                 LoadDataGridView();
                 ResetValues();
@@ -205,3 +203,4 @@ namespace BaiTapLon_QuanLyLinhKien.View
         }
     }
 }
+

@@ -64,6 +64,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConnectDatabase\clsConnectDB.cs" />
+    <Compile Include="Model\clsLISTChiTietHoaDon.cs" />
     <Compile Include="Model\clsPhanQuyen.cs" />
     <Compile Include="qlLinhKien.designer.cs">
       <AutoGen>True</AutoGen>
@@ -104,6 +105,12 @@
     <Compile Include="View\frmLoaiLinhKien.Designer.cs">
       <DependentUpon>frmLoaiLinhKien.cs</DependentUpon>
     </Compile>
+    <Compile Include="View\frmMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\frmMain.designer.cs">
+      <DependentUpon>frmMain.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\frmNhanVien.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -113,7 +120,7 @@
     <Compile Include="View\frmTimKiemHoaDon.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="View\frmTimKiemHoaDon.Designer.cs">
+    <Compile Include="View\frmTimKiemHoaDon.designer.cs">
       <DependentUpon>frmTimKiemHoaDon.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -136,6 +143,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="View\frmLoaiLinhKien.resx">
       <DependentUpon>frmLoaiLinhKien.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\frmMain.resx">
+      <DependentUpon>frmMain.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\frmNhanVien.resx">
       <DependentUpon>frmNhanVien.cs</DependentUpon>

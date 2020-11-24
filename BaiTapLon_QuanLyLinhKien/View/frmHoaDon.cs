@@ -1,5 +1,6 @@
 ﻿using BaiTapLon_QuanLyLinhKien.ConnectDatabase;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -17,6 +18,8 @@ namespace BaiTapLon_QuanLyLinhKien.View
         {
             InitializeComponent();
         }
+        Model.clsChiTietHoaDon CTHD = new Model.clsChiTietHoaDon();
+        Model.clsLISTChiTietHoaDon dsCTHD = new Model.clsLISTChiTietHoaDon();
 
         DataTable tblChiTietHoaDon { get; set; }
         DataTable tblNhanVien { get; set; }
@@ -37,35 +40,45 @@ namespace BaiTapLon_QuanLyLinhKien.View
             //txtTenLinhKien.ReadOnly = true;
             txtDonGia.ReadOnly = true;
             txtThanhTien.ReadOnly = true;
+            txtThanhTien.Text = "0";
             //txtTenKhachHang.ReadOnly = true;
             txtGiamGia.Text = "0";
+            
 
-            sql = "SELECT maKhachHang, tenKhachHang, diaChi, soDienThoai FROM tblKhachHang";
+            sql = "SELECT maKhachHang, tenKhachHang, diaChi FROM tblKhachHang";
             tblChiTietHoaDon = clsConnectDB.GetDataToTable(sql);
             cboMaKhach.DataSource = tblChiTietHoaDon;
             cboMaKhach.ValueMember = "maKhachHang"; //Trường giá trị
             cboMaKhach.DisplayMember = "tenKhachHang"; //Trường hiển thị
+            cboMaKhach.Text = "";
+            txtDiaChi.Text = "";
+            txtSDT.Text = "";
 
-            sql = "SELECT diaChi FROM tblKhachHang WHERE maKhachHang = " + cboMaKhach.ValueMember;
-            txtDiaChi.Text = clsConnectDB.GetFieldValues(sql);
+            //sql = "SELECT diaChi FROM tblKhachHang WHERE maKhachHang = " + cboMaKhach.ValueMember;
+            //txtDiaChi.Text = clsConnectDB.GetFieldValues(sql1);
 
             sql = "SELECT maNhanVien, tenNhanVien FROM tblNhanVien";
             tblNhanVien = clsConnectDB.GetDataToTable(sql);
             cboMaNhanVien.DataSource = tblNhanVien;
             cboMaNhanVien.ValueMember = "maNhanVien"; //Trường giá trị
             cboMaNhanVien.DisplayMember = "tenNhanVien"; //Trường hiển thị
+            cboMaNhanVien.Text = "";
 
             sql = "SELECT maLinhKien, tenLinhKien FROM tblLinhKien";
             tblLinhKien = clsConnectDB.GetDataToTable(sql);
             cboMaHang.DataSource = tblLinhKien;
             cboMaHang.ValueMember = "maLinhKien"; //Trường giá trị
             cboMaHang.DisplayMember = "tenLinhKien"; //Trường hiển thị
+            cboMaHang.Text = "";
+            txtSoLuong.Text = "";
+            txtDonGia.Text = "";
+            txtThanhTien.Text = "";
 
-            str = "SELECT donGia FROM tblLinhKien WHERE maLinhKien = " + cboMaHang.ValueMember;
-            txtDonGia.Text = clsConnectDB.GetFieldValues(str);
+            //str = "SELECT donGia FROM tblLinhKien WHERE maLinhKien = " + cboMaHang.ValueMember;
+            //txtDonGia.Text = clsConnectDB.GetFieldValues(str);
 
-            str = "SELECT soLuong FROM tblLinhKien WHERE maLinhKien = " + cboMaHang.ValueMember;
-            txtSoLuong.Text = clsConnectDB.GetFieldValues(str);
+            //str = "SELECT soLuong FROM tblLinhKien WHERE maLinhKien = " + cboMaHang.ValueMember;
+            //txtSoLuong.Text = clsConnectDB.GetFieldValues(str);
 
 
 
@@ -137,7 +150,6 @@ namespace BaiTapLon_QuanLyLinhKien.View
             cboMaNhanVien.Text = "";
             cboMaKhach.Text = "";
             //txtTenKhachHang.Text = "0";
-            lblBangChu.Text = "Bằng chữ: ";
         }
 
         private void btnLuuHoaDon_Click(object sender, EventArgs e)
@@ -305,6 +317,114 @@ namespace BaiTapLon_QuanLyLinhKien.View
         private void btnDong_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void cboMaKhach_TextChanged(object sender, EventArgs e)
+        {
+            string sql;
+            sql = "SELECT maKhachHang, tenKhachHang FROM tblKhachHang";
+            tblChiTietHoaDon = clsConnectDB.GetDataToTable(sql);
+            cboMaKhach.ValueMember = "maKhachHang"; //Trường giá trị
+            cboMaKhach.DisplayMember = "tenKhachHang"; //Trường hiển thị
+
+            sql = "SELECT diaChi FROM tblKhachHang WHERE maKhachHang = " + cboMaKhach.SelectedValue;
+            txtDiaChi.Text = clsConnectDB.GetFieldValues(sql);
+
+            sql = "SELECT soDienThoai FROM tblKhachHang WHERE maKhachHang = " + cboMaKhach.SelectedValue;
+            txtSDT.Text = clsConnectDB.GetFieldValues(sql);
+        }
+
+        private void cboMaHang_TextChanged(object sender, EventArgs e)
+        {
+            string sql;
+            sql = "SELECT maLinhKien, tenLinhKien FROM tblLinhKien";
+            tblLinhKien = clsConnectDB.GetDataToTable(sql);
+            //cboMaHang.DataSource = tblLinhKien;
+            cboMaHang.ValueMember = "maLinhKien"; //Trường giá trị
+            cboMaHang.DisplayMember = "tenLinhKien"; //Trường hiển thị
+
+            sql = "SELECT donGia FROM tblLinhKien WHERE maLinhKien = " + cboMaHang.SelectedValue;
+            txtDonGia.Text = clsConnectDB.GetFieldValues(sql);
+        }
+
+        private void txtSoLuong_TextChanged(object sender, EventArgs e)
+        {
+            double tt, sl, dg, gg;
+            if (txtSoLuong.Text == "")
+                sl = 0;
+            else
+                sl = Convert.ToDouble(txtSoLuong.Text);
+            if (txtGiamGia.Text == "")
+                gg = 0;
+            else
+                gg = Convert.ToDouble(txtGiamGia.Text);
+            if (txtDonGia.Text == "")
+                dg = 0;
+            else
+                dg = Convert.ToDouble(txtDonGia.Text);
+            tt = sl * dg - sl * dg * gg / 100;
+            txtThanhTien.Text = tt.ToString();
+        }
+
+        private void txtGiamGia_TextChanged(object sender, EventArgs e)
+        {
+            double tt, sl, dg, gg;
+            if (txtSoLuong.Text == "")
+                sl = 0;
+            else
+                sl = Convert.ToDouble(txtSoLuong.Text);
+            if (txtGiamGia.Text == "")
+                gg = 0;
+            else
+                gg = Convert.ToDouble(txtGiamGia.Text);
+            if (txtDonGia.Text == "")
+                dg = 0;
+            else
+                dg = Convert.ToDouble(txtDonGia.Text);
+            tt = sl * dg - sl * dg * gg / 100;
+            txtThanhTien.Text = tt.ToString();
+        }
+
+        private void btnThem_Click(object sender, EventArgs e)
+        {
+            /*try
+            {
+                CTHD.MaLinhKien = cboMaHang.Text;
+                CTHD.SoLuong = Convert.ToInt32(txtSoLuong.Text);
+                CTHD.DonGia = Convert.ToDouble(txtDonGia.Text);
+                CTHD.GiamGia = txtGiamGia.Text;
+                if (dsCTHD.Them(CTHD))
+                {
+                    LoadToGridView(dsCTHD.getALL());
+                }
+            }*/
+
+            string sql;
+            sql = "SELECT tenLinhKien FROM tblLinhKien";
+            tblChiTietHoaDon = clsConnectDB.GetDataToTable(sql);
+            dgvHoaDon.DataSource = tblChiTietHoaDon;
+            dgvHoaDon.Columns[0].HeaderText = "Mã hàng";
+            /*dgvHoaDon.Columns[1].HeaderText = "Tên hàng";
+            dgvHoaDon.Columns[2].HeaderText = "Đơn giá";
+            dgvHoaDon.Columns[3].HeaderText = "Giảm giá %";
+            dgvHoaDon.Columns[4].HeaderText = "Thành tiền";*/
+            dgvHoaDon.Columns[0].Width = 80;
+            /*dgvHoaDon.Columns[1].Width = 130;
+            dgvHoaDon.Columns[2].Width = 90;
+            dgvHoaDon.Columns[3].Width = 90;
+            dgvHoaDon.Columns[4].Width = 90;*/
+            dgvHoaDon.AllowUserToAddRows = false;
+            dgvHoaDon.EditMode = DataGridViewEditMode.EditProgrammatically;
+        }
+
+        void LoadToGridView(ArrayList ALLDS)
+        {
+            DataGridView Items;
+            foreach (Model.clsChiTietHoaDon item in ALLDS)
+            {
+            
+
+            }
         }
     }
 }

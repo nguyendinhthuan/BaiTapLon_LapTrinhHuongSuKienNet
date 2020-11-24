@@ -48,16 +48,13 @@ namespace BaiTapLon_QuanLyLinhKien
     partial void InserttblNhanVien(tblNhanVien instance);
     partial void UpdatetblNhanVien(tblNhanVien instance);
     partial void DeletetblNhanVien(tblNhanVien instance);
-    partial void InserttblPhanQuyen(tblPhanQuyen instance);
-    partial void UpdatetblPhanQuyen(tblPhanQuyen instance);
-    partial void DeletetblPhanQuyen(tblPhanQuyen instance);
     partial void InserttblTaiKhoan(tblTaiKhoan instance);
     partial void UpdatetblTaiKhoan(tblTaiKhoan instance);
     partial void DeletetblTaiKhoan(tblTaiKhoan instance);
     #endregion
 		
 		public qlLinhKienDataContext() : 
-				base(global::BaiTapLon_QuanLyLinhKien.Properties.Settings.Default.QuanLyLinhKienConnectionString, mappingSource)
+				base(global::BaiTapLon_QuanLyLinhKien.Properties.Settings.Default.QuanLyLinhKienConnectionString1, mappingSource)
 		{
 			OnCreated();
 		}
@@ -142,22 +139,6 @@ namespace BaiTapLon_QuanLyLinhKien
 			}
 		}
 		
-		public System.Data.Linq.Table<tblNhanVien_PhanQuyen> tblNhanVien_PhanQuyens
-		{
-			get
-			{
-				return this.GetTable<tblNhanVien_PhanQuyen>();
-			}
-		}
-		
-		public System.Data.Linq.Table<tblPhanQuyen> tblPhanQuyens
-		{
-			get
-			{
-				return this.GetTable<tblPhanQuyen>();
-			}
-		}
-		
 		public System.Data.Linq.Table<tblTaiKhoan> tblTaiKhoans
 		{
 			get
@@ -171,9 +152,9 @@ namespace BaiTapLon_QuanLyLinhKien
 	public partial class tblChiTietHoaDon
 	{
 		
-		private string _maHoaDon;
+		private System.Nullable<int> _maHoaDon;
 		
-		private string _maLinhKien;
+		private System.Nullable<int> _maLinhKien;
 		
 		private int _soLuong;
 		
@@ -185,8 +166,8 @@ namespace BaiTapLon_QuanLyLinhKien
 		{
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_maHoaDon", DbType="NVarChar(50)")]
-		public string maHoaDon
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_maHoaDon", DbType="Int")]
+		public System.Nullable<int> maHoaDon
 		{
 			get
 			{
@@ -201,8 +182,8 @@ namespace BaiTapLon_QuanLyLinhKien
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_maLinhKien", DbType="NVarChar(50)")]
-		public string maLinhKien
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_maLinhKien", DbType="Int")]
+		public System.Nullable<int> maLinhKien
 		{
 			get
 			{
@@ -272,25 +253,17 @@ namespace BaiTapLon_QuanLyLinhKien
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
-		private string _maHoaDon;
+		private int _maHoaDon;
 		
-		private string _maNhanVien;
+		private int _maNhanVien;
 		
-		private string _maKhachHang;
+		private int _maKhachHang;
 		
-		private string _maLinhKien;
-		
-		private System.DateTime _ngayDatHang;
-		
-		private System.DateTime _ngayGiaoHang;
-		
-		private string _noiNhan;
+		private System.DateTime _ngayBanHang;
 		
 		private double _tongTien;
 		
 		private string _ghiChu;
-		
-		private string _trangThai;
 		
 		private EntityRef<tblKhachHang> _tblKhachHang;
 		
@@ -300,26 +273,18 @@ namespace BaiTapLon_QuanLyLinhKien
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
-    partial void OnmaHoaDonChanging(string value);
+    partial void OnmaHoaDonChanging(int value);
     partial void OnmaHoaDonChanged();
-    partial void OnmaNhanVienChanging(string value);
+    partial void OnmaNhanVienChanging(int value);
     partial void OnmaNhanVienChanged();
-    partial void OnmaKhachHangChanging(string value);
+    partial void OnmaKhachHangChanging(int value);
     partial void OnmaKhachHangChanged();
-    partial void OnmaLinhKienChanging(string value);
-    partial void OnmaLinhKienChanged();
-    partial void OnngayDatHangChanging(System.DateTime value);
-    partial void OnngayDatHangChanged();
-    partial void OnngayGiaoHangChanging(System.DateTime value);
-    partial void OnngayGiaoHangChanged();
-    partial void OnnoiNhanChanging(string value);
-    partial void OnnoiNhanChanged();
+    partial void OnngayBanHangChanging(System.DateTime value);
+    partial void OnngayBanHangChanged();
     partial void OntongTienChanging(double value);
     partial void OntongTienChanged();
     partial void OnghiChuChanging(string value);
     partial void OnghiChuChanged();
-    partial void OntrangThaiChanging(string value);
-    partial void OntrangThaiChanged();
     #endregion
 		
 		public tblHoaDon()
@@ -329,8 +294,8 @@ namespace BaiTapLon_QuanLyLinhKien
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_maHoaDon", DbType="NVarChar(50) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
-		public string maHoaDon
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_maHoaDon", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int maHoaDon
 		{
 			get
 			{
@@ -349,8 +314,8 @@ namespace BaiTapLon_QuanLyLinhKien
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_maNhanVien", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
-		public string maNhanVien
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_maNhanVien", DbType="Int NOT NULL")]
+		public int maNhanVien
 		{
 			get
 			{
@@ -373,8 +338,8 @@ namespace BaiTapLon_QuanLyLinhKien
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_maKhachHang", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
-		public string maKhachHang
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_maKhachHang", DbType="Int NOT NULL")]
+		public int maKhachHang
 		{
 			get
 			{
@@ -397,82 +362,22 @@ namespace BaiTapLon_QuanLyLinhKien
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_maLinhKien", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
-		public string maLinhKien
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ngayBanHang", DbType="Date NOT NULL")]
+		public System.DateTime ngayBanHang
 		{
 			get
 			{
-				return this._maLinhKien;
+				return this._ngayBanHang;
 			}
 			set
 			{
-				if ((this._maLinhKien != value))
+				if ((this._ngayBanHang != value))
 				{
-					this.OnmaLinhKienChanging(value);
+					this.OnngayBanHangChanging(value);
 					this.SendPropertyChanging();
-					this._maLinhKien = value;
-					this.SendPropertyChanged("maLinhKien");
-					this.OnmaLinhKienChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ngayDatHang", DbType="Date NOT NULL")]
-		public System.DateTime ngayDatHang
-		{
-			get
-			{
-				return this._ngayDatHang;
-			}
-			set
-			{
-				if ((this._ngayDatHang != value))
-				{
-					this.OnngayDatHangChanging(value);
-					this.SendPropertyChanging();
-					this._ngayDatHang = value;
-					this.SendPropertyChanged("ngayDatHang");
-					this.OnngayDatHangChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ngayGiaoHang", DbType="Date NOT NULL")]
-		public System.DateTime ngayGiaoHang
-		{
-			get
-			{
-				return this._ngayGiaoHang;
-			}
-			set
-			{
-				if ((this._ngayGiaoHang != value))
-				{
-					this.OnngayGiaoHangChanging(value);
-					this.SendPropertyChanging();
-					this._ngayGiaoHang = value;
-					this.SendPropertyChanged("ngayGiaoHang");
-					this.OnngayGiaoHangChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_noiNhan", DbType="NVarChar(50)")]
-		public string noiNhan
-		{
-			get
-			{
-				return this._noiNhan;
-			}
-			set
-			{
-				if ((this._noiNhan != value))
-				{
-					this.OnnoiNhanChanging(value);
-					this.SendPropertyChanging();
-					this._noiNhan = value;
-					this.SendPropertyChanged("noiNhan");
-					this.OnnoiNhanChanged();
+					this._ngayBanHang = value;
+					this.SendPropertyChanged("ngayBanHang");
+					this.OnngayBanHangChanged();
 				}
 			}
 		}
@@ -517,26 +422,6 @@ namespace BaiTapLon_QuanLyLinhKien
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_trangThai", DbType="NVarChar(50)")]
-		public string trangThai
-		{
-			get
-			{
-				return this._trangThai;
-			}
-			set
-			{
-				if ((this._trangThai != value))
-				{
-					this.OntrangThaiChanging(value);
-					this.SendPropertyChanging();
-					this._trangThai = value;
-					this.SendPropertyChanged("trangThai");
-					this.OntrangThaiChanged();
-				}
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tblKhachHang_tblHoaDon", Storage="_tblKhachHang", ThisKey="maKhachHang", OtherKey="maKhachHang", IsForeignKey=true)]
 		public tblKhachHang tblKhachHang
 		{
@@ -564,7 +449,7 @@ namespace BaiTapLon_QuanLyLinhKien
 					}
 					else
 					{
-						this._maKhachHang = default(string);
+						this._maKhachHang = default(int);
 					}
 					this.SendPropertyChanged("tblKhachHang");
 				}
@@ -598,7 +483,7 @@ namespace BaiTapLon_QuanLyLinhKien
 					}
 					else
 					{
-						this._maNhanVien = default(string);
+						this._maNhanVien = default(int);
 					}
 					this.SendPropertyChanged("tblNhanVien");
 				}
@@ -632,7 +517,7 @@ namespace BaiTapLon_QuanLyLinhKien
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
-		private string _maKhachHang;
+		private int _maKhachHang;
 		
 		private string _tenKhachHang;
 		
@@ -648,7 +533,7 @@ namespace BaiTapLon_QuanLyLinhKien
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
-    partial void OnmaKhachHangChanging(string value);
+    partial void OnmaKhachHangChanging(int value);
     partial void OnmaKhachHangChanged();
     partial void OntenKhachHangChanging(string value);
     partial void OntenKhachHangChanged();
@@ -666,8 +551,8 @@ namespace BaiTapLon_QuanLyLinhKien
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_maKhachHang", DbType="NVarChar(50) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
-		public string maKhachHang
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_maKhachHang", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int maKhachHang
 		{
 			get
 			{
@@ -818,7 +703,7 @@ namespace BaiTapLon_QuanLyLinhKien
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
-		private string _maLinhKien;
+		private int _maLinhKien;
 		
 		private string _tenLinhKien;
 		
@@ -826,9 +711,9 @@ namespace BaiTapLon_QuanLyLinhKien
 		
 		private System.DateTime _ngayNhap;
 		
-		private string _maNhaCungCap;
+		private int _soLuong;
 		
-		private string _trangThai;
+		private int _maNhaCungCap;
 		
 		private string _maLoaiLinhKien;
 		
@@ -840,7 +725,7 @@ namespace BaiTapLon_QuanLyLinhKien
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
-    partial void OnmaLinhKienChanging(string value);
+    partial void OnmaLinhKienChanging(int value);
     partial void OnmaLinhKienChanged();
     partial void OntenLinhKienChanging(string value);
     partial void OntenLinhKienChanged();
@@ -848,10 +733,10 @@ namespace BaiTapLon_QuanLyLinhKien
     partial void OndonGiaChanged();
     partial void OnngayNhapChanging(System.DateTime value);
     partial void OnngayNhapChanged();
-    partial void OnmaNhaCungCapChanging(string value);
+    partial void OnsoLuongChanging(int value);
+    partial void OnsoLuongChanged();
+    partial void OnmaNhaCungCapChanging(int value);
     partial void OnmaNhaCungCapChanged();
-    partial void OntrangThaiChanging(string value);
-    partial void OntrangThaiChanged();
     partial void OnmaLoaiLinhKienChanging(string value);
     partial void OnmaLoaiLinhKienChanged();
     #endregion
@@ -863,8 +748,8 @@ namespace BaiTapLon_QuanLyLinhKien
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_maLinhKien", DbType="NVarChar(50) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
-		public string maLinhKien
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_maLinhKien", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int maLinhKien
 		{
 			get
 			{
@@ -943,8 +828,28 @@ namespace BaiTapLon_QuanLyLinhKien
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_maNhaCungCap", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
-		public string maNhaCungCap
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_soLuong", DbType="Int NOT NULL")]
+		public int soLuong
+		{
+			get
+			{
+				return this._soLuong;
+			}
+			set
+			{
+				if ((this._soLuong != value))
+				{
+					this.OnsoLuongChanging(value);
+					this.SendPropertyChanging();
+					this._soLuong = value;
+					this.SendPropertyChanged("soLuong");
+					this.OnsoLuongChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_maNhaCungCap", DbType="Int NOT NULL")]
+		public int maNhaCungCap
 		{
 			get
 			{
@@ -963,26 +868,6 @@ namespace BaiTapLon_QuanLyLinhKien
 					this._maNhaCungCap = value;
 					this.SendPropertyChanged("maNhaCungCap");
 					this.OnmaNhaCungCapChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_trangThai", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
-		public string trangThai
-		{
-			get
-			{
-				return this._trangThai;
-			}
-			set
-			{
-				if ((this._trangThai != value))
-				{
-					this.OntrangThaiChanging(value);
-					this.SendPropertyChanging();
-					this._trangThai = value;
-					this.SendPropertyChanged("trangThai");
-					this.OntrangThaiChanged();
 				}
 			}
 		}
@@ -1072,7 +957,7 @@ namespace BaiTapLon_QuanLyLinhKien
 					}
 					else
 					{
-						this._maNhaCungCap = default(string);
+						this._maNhaCungCap = default(int);
 					}
 					this.SendPropertyChanged("tblNhaCungCap");
 				}
@@ -1220,7 +1105,7 @@ namespace BaiTapLon_QuanLyLinhKien
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
-		private string _maNhaCungCap;
+		private int _maNhaCungCap;
 		
 		private string _tenNhaCungCap;
 		
@@ -1230,7 +1115,7 @@ namespace BaiTapLon_QuanLyLinhKien
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
-    partial void OnmaNhaCungCapChanging(string value);
+    partial void OnmaNhaCungCapChanging(int value);
     partial void OnmaNhaCungCapChanged();
     partial void OntenNhaCungCapChanging(string value);
     partial void OntenNhaCungCapChanged();
@@ -1242,8 +1127,8 @@ namespace BaiTapLon_QuanLyLinhKien
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_maNhaCungCap", DbType="NVarChar(50) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
-		public string maNhaCungCap
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_maNhaCungCap", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int maNhaCungCap
 		{
 			get
 			{
@@ -1334,7 +1219,7 @@ namespace BaiTapLon_QuanLyLinhKien
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
-		private string _maNhanVien;
+		private int _maNhanVien;
 		
 		private string _tenNhanVien;
 		
@@ -1350,7 +1235,7 @@ namespace BaiTapLon_QuanLyLinhKien
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
-    partial void OnmaNhanVienChanging(string value);
+    partial void OnmaNhanVienChanging(int value);
     partial void OnmaNhanVienChanged();
     partial void OntenNhanVienChanging(string value);
     partial void OntenNhanVienChanged();
@@ -1367,8 +1252,8 @@ namespace BaiTapLon_QuanLyLinhKien
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_maNhanVien", DbType="NVarChar(50) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
-		public string maNhanVien
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_maNhanVien", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int maNhanVien
 		{
 			get
 			{
@@ -1518,174 +1403,19 @@ namespace BaiTapLon_QuanLyLinhKien
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.tblNhanVien_PhanQuyen")]
-	public partial class tblNhanVien_PhanQuyen
-	{
-		
-		private string _maPhanQuyen;
-		
-		private string _maTaiKhoan;
-		
-		public tblNhanVien_PhanQuyen()
-		{
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_maPhanQuyen", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
-		public string maPhanQuyen
-		{
-			get
-			{
-				return this._maPhanQuyen;
-			}
-			set
-			{
-				if ((this._maPhanQuyen != value))
-				{
-					this._maPhanQuyen = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_maTaiKhoan", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
-		public string maTaiKhoan
-		{
-			get
-			{
-				return this._maTaiKhoan;
-			}
-			set
-			{
-				if ((this._maTaiKhoan != value))
-				{
-					this._maTaiKhoan = value;
-				}
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.tblPhanQuyen")]
-	public partial class tblPhanQuyen : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private string _maPhanQuyen;
-		
-		private string _tenPhanQuyen;
-		
-		private string _ghiChu;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnmaPhanQuyenChanging(string value);
-    partial void OnmaPhanQuyenChanged();
-    partial void OntenPhanQuyenChanging(string value);
-    partial void OntenPhanQuyenChanged();
-    partial void OnghiChuChanging(string value);
-    partial void OnghiChuChanged();
-    #endregion
-		
-		public tblPhanQuyen()
-		{
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_maPhanQuyen", DbType="NVarChar(50) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
-		public string maPhanQuyen
-		{
-			get
-			{
-				return this._maPhanQuyen;
-			}
-			set
-			{
-				if ((this._maPhanQuyen != value))
-				{
-					this.OnmaPhanQuyenChanging(value);
-					this.SendPropertyChanging();
-					this._maPhanQuyen = value;
-					this.SendPropertyChanged("maPhanQuyen");
-					this.OnmaPhanQuyenChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_tenPhanQuyen", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
-		public string tenPhanQuyen
-		{
-			get
-			{
-				return this._tenPhanQuyen;
-			}
-			set
-			{
-				if ((this._tenPhanQuyen != value))
-				{
-					this.OntenPhanQuyenChanging(value);
-					this.SendPropertyChanging();
-					this._tenPhanQuyen = value;
-					this.SendPropertyChanged("tenPhanQuyen");
-					this.OntenPhanQuyenChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ghiChu", DbType="NVarChar(50)")]
-		public string ghiChu
-		{
-			get
-			{
-				return this._ghiChu;
-			}
-			set
-			{
-				if ((this._ghiChu != value))
-				{
-					this.OnghiChuChanging(value);
-					this.SendPropertyChanging();
-					this._ghiChu = value;
-					this.SendPropertyChanged("ghiChu");
-					this.OnghiChuChanged();
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.tblTaiKhoan")]
 	public partial class tblTaiKhoan : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
-		private string _maTaiKhoan;
+		private int _maTaiKhoan;
 		
 		private string _tenTaiKhoan;
 		
 		private string _matKhau;
 		
-		private string _maNhanVien;
+		private System.Nullable<int> _maNhanVien;
 		
 		private EntityRef<tblNhanVien> _tblNhanVien;
 		
@@ -1693,13 +1423,13 @@ namespace BaiTapLon_QuanLyLinhKien
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
-    partial void OnmaTaiKhoanChanging(string value);
+    partial void OnmaTaiKhoanChanging(int value);
     partial void OnmaTaiKhoanChanged();
     partial void OntenTaiKhoanChanging(string value);
     partial void OntenTaiKhoanChanged();
     partial void OnmatKhauChanging(string value);
     partial void OnmatKhauChanged();
-    partial void OnmaNhanVienChanging(string value);
+    partial void OnmaNhanVienChanging(System.Nullable<int> value);
     partial void OnmaNhanVienChanged();
     #endregion
 		
@@ -1709,8 +1439,8 @@ namespace BaiTapLon_QuanLyLinhKien
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_maTaiKhoan", DbType="NVarChar(50) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
-		public string maTaiKhoan
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_maTaiKhoan", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int maTaiKhoan
 		{
 			get
 			{
@@ -1769,8 +1499,8 @@ namespace BaiTapLon_QuanLyLinhKien
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_maNhanVien", DbType="NVarChar(50)")]
-		public string maNhanVien
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_maNhanVien", DbType="Int")]
+		public System.Nullable<int> maNhanVien
 		{
 			get
 			{
@@ -1820,7 +1550,7 @@ namespace BaiTapLon_QuanLyLinhKien
 					}
 					else
 					{
-						this._maNhanVien = default(string);
+						this._maNhanVien = default(Nullable<int>);
 					}
 					this.SendPropertyChanged("tblNhanVien");
 				}

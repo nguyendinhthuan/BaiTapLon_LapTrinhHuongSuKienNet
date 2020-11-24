@@ -6,7 +6,20 @@ using System.Threading.Tasks;
 
 namespace BaiTapLon_QuanLyLinhKien.Model
 {
-    class clsLoaiLinhKien
+    class clsLoaiLinhKien : ConnectDatabase.clsConnectDB
     {
+        qlLinhKienDataContext dt;
+
+        public clsLoaiLinhKien()
+        {
+            dt = GetDataContext();
+        }
+
+        public IEnumerable<tblLoaiLinhKien> getAllLoaiLinhKien()
+        {
+            IEnumerable<tblLoaiLinhKien> llk = from n in dt.tblLoaiLinhKiens
+                                               select n;
+            return llk;
+        }
     }
 }

@@ -28,7 +28,7 @@ namespace BaiTapLon_QuanLyLinhKien.View
         private void LoadDataGridView()
         {
             string sql;
-            sql = "SELECT * from tblKhach";
+            sql = "SELECT * from tblKhachHang";
             tblKH = clsConnectDB.GetDataToTable(sql); //Lấy dữ liệu từ bảng
             dgvKhachHang.DataSource = tblKH; //Hiển thị vào dataGridView
             dgvKhachHang.Columns[0].HeaderText = "Mã khách";
@@ -36,11 +36,11 @@ namespace BaiTapLon_QuanLyLinhKien.View
             dgvKhachHang.Columns[2].HeaderText = "Địa chỉ";
             dgvKhachHang.Columns[3].HeaderText = "Điện thoại";
             dgvKhachHang.Columns[3].HeaderText = "Email";
-            dgvKhachHang.Columns[0].Width = 100;
-            dgvKhachHang.Columns[1].Width = 150;
-            dgvKhachHang.Columns[2].Width = 150;
-            dgvKhachHang.Columns[3].Width = 150;
-            dgvKhachHang.Columns[4].Width = 150;
+            dgvKhachHang.Columns[0].Width = 120;
+            dgvKhachHang.Columns[1].Width = 170;
+            dgvKhachHang.Columns[2].Width = 170;
+            dgvKhachHang.Columns[3].Width = 175;
+            dgvKhachHang.Columns[4].Width = 190;
             dgvKhachHang.AllowUserToAddRows = false;
             dgvKhachHang.EditMode = DataGridViewEditMode.EditProgrammatically;
         }
@@ -58,11 +58,11 @@ namespace BaiTapLon_QuanLyLinhKien.View
                 MessageBox.Show("Không có dữ liệu!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
-            txtMaKhachHang.Text = dgvKhachHang.CurrentRow.Cells["MaKhach"].Value.ToString();
-            txtTenKhachHang.Text = dgvKhachHang.CurrentRow.Cells["TenKhach"].Value.ToString();
-            txtDiaChiKhach.Text = dgvKhachHang.CurrentRow.Cells["DiaChi"].Value.ToString();
-            txtSoDienThoaiKhach.Text = dgvKhachHang.CurrentRow.Cells["DienThoai"].Value.ToString();
-            txtEmail.Text = dgvKhachHang.CurrentRow.Cells["Email"].Value.ToString();
+            txtMaKhachHang.Text = dgvKhachHang.CurrentRow.Cells["maKhachHang"].Value.ToString();
+            txtTenKhachHang.Text = dgvKhachHang.CurrentRow.Cells["tenKhachHang"].Value.ToString();
+            txtDiaChiKhach.Text = dgvKhachHang.CurrentRow.Cells["diaChi"].Value.ToString();
+            txtSoDienThoaiKhach.Text = dgvKhachHang.CurrentRow.Cells["soDienThoai"].Value.ToString();
+            txtEmail.Text = dgvKhachHang.CurrentRow.Cells["email"].Value.ToString();
             btnSua.Enabled = true;
             btnXoa.Enabled = true;
             btnBoQua.Enabled = true;
@@ -76,8 +76,6 @@ namespace BaiTapLon_QuanLyLinhKien.View
             btnLuu.Enabled = true;
             btnThem.Enabled = false;
             ResetValues();
-            txtMaKhachHang.Enabled = true;
-            txtMaKhachHang.Focus();
         }
         private void ResetValues()
         {
@@ -91,12 +89,12 @@ namespace BaiTapLon_QuanLyLinhKien.View
         private void btnLuu_Click(object sender, EventArgs e)
         {
             string sql;
-            if (txtMaKhachHang.Text.Trim().Length == 0)
+            /*if (txtMaKhachHang.Text.Trim().Length == 0)
             {
                 MessageBox.Show("Bạn phải nhập mã khách", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 txtMaKhachHang.Focus();
                 return;
-            }
+            }*/
             if (txtTenKhachHang.Text.Trim().Length == 0)
             {
                 MessageBox.Show("Bạn phải nhập tên khách", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -116,7 +114,7 @@ namespace BaiTapLon_QuanLyLinhKien.View
                 return;
             }
             //Kiểm tra đã tồn tại mã khách chưa
-            sql = "SELECT MaKhach FROM tblKhach WHERE MaKhach=N'" + txtMaKhachHang.Text.Trim() + "'";
+            sql = "SELECT maKhachHang FROM tblKhachHang WHERE maKhachHang=N'" + txtMaKhachHang.Text.Trim() + "'";
             if (clsConnectDB.CheckKey(sql))
             {
                 MessageBox.Show("Mã khách này đã tồn tại", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -124,8 +122,7 @@ namespace BaiTapLon_QuanLyLinhKien.View
                 return;
             }
             //Chèn thêm
-            sql = "INSERT INTO tblKhach VALUES (N'" + txtMaKhachHang.Text.Trim() +
-                "',N'" + txtTenKhachHang.Text.Trim() + "',N'" + txtDiaChiKhach.Text.Trim() + "','" + txtSoDienThoaiKhach.Text +"',N'" + txtEmail.Text + " ')";
+            sql = "INSERT INTO tblKhachHang VALUES (N'" + txtTenKhachHang.Text.Trim() + "',N'" + txtDiaChiKhach.Text.Trim() + "','" + txtSoDienThoaiKhach.Text + "',N'" + txtEmail.Text + " ')";
             clsConnectDB.RunSQL(sql);
             LoadDataGridView();
             ResetValues();
@@ -169,9 +166,9 @@ namespace BaiTapLon_QuanLyLinhKien.View
                 txtSoDienThoaiKhach.Focus();
                 return;
             }
-            sql = "UPDATE tblKhach SET TenKhach=N'" + txtTenKhachHang.Text.Trim().ToString() + "',DiaChi=N'" +
-                txtDiaChiKhach.Text.Trim().ToString() + "',DienThoai='" + txtSoDienThoaiKhach.Text.ToString() + "',Email='" + txtEmail.Text.ToString() +
-                "' WHERE MaKhach=N'" + txtMaKhachHang.Text + "'";
+            sql = "UPDATE tblKhachHang SET tenKhachHang=N'" + txtTenKhachHang.Text.Trim().ToString() + "',diaChi=N'" +
+                txtDiaChiKhach.Text.Trim().ToString() + "',soDienThoai='" + txtSoDienThoaiKhach.Text.ToString() + "',email='" + txtEmail.Text.ToString() +
+                "' WHERE maKhachHang=N'" + txtMaKhachHang.Text + "'";
             clsConnectDB.RunSQL(sql);
             LoadDataGridView();
             ResetValues();
@@ -193,7 +190,7 @@ namespace BaiTapLon_QuanLyLinhKien.View
             }
             if (MessageBox.Show("Bạn có muốn xoá bản ghi này không?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
-                sql = "DELETE tblKhach WHERE MaKhach=N'" + txtMaKhachHang.Text + "'";
+                sql = "DELETE tblKhachHang WHERE maKhachHang=N'" + txtMaKhachHang.Text + "'";
                 clsConnectDB.RunSqlDel(sql);
                 LoadDataGridView();
                 ResetValues();
@@ -217,3 +214,4 @@ namespace BaiTapLon_QuanLyLinhKien.View
         }
     }
 }
+

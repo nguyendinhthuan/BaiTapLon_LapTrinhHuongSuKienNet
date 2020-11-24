@@ -19,91 +19,90 @@ namespace BaiTapLon_QuanLyLinhKien.View
         {
             InitializeComponent();
         }
+
         DataTable tblH = new DataTable();
+
+        DataTable tblLoaiLinhKien { get; set; }
+
+        DataTable tblLinhKien { get; set; }
+
+        TreeNode nodeGoc;
+        Model.clsLoaiLinhKien loaiLinhKien;
+        Model.clsLinhKien linhKien;
+
         private void frmDanhMucLinhKien_Load(object sender, EventArgs e)
         {
             string sql;
-            sql = "SELECT * from tblLoaiLinhKien";
-            txtMaLinhKien.Enabled = false;
+
+            sql = "SELECT maLoaiLinhKien, tenLoaiLinhKien from tblLoaiLinhKien";
+            tblLoaiLinhKien = clsConnectDB.GetDataToTable(sql);
+            cboLoaiLinhKien.DataSource = tblLoaiLinhKien;
+            cboLoaiLinhKien.ValueMember = "maLoaiLinhKien"; //Trường giá trị
+            cboLoaiLinhKien.DisplayMember = "tenLoaiLinhKien"; //Trường hiển thị
+            
             btnLuu.Enabled = false;
             btnBoQua.Enabled = false;
+            btnSua.Enabled = false;
+            btnXoa.Enabled = false;
             LoadDataGridView();
-            clsConnectDB.FillCombo(sql, cboLoaiLinhKien, "maLoaiLinhKien", "tenLoaiLinhKien");
-            cboLoaiLinhKien.SelectedIndex = -1;
+            //cboLoaiLinhKien.SelectedIndex = -1;
             ResetValues();
+
+            nodeGoc = new TreeNode("Danh sách linh kiện");
+            loaiLinhKien = new Model.clsLoaiLinhKien();
+            linhKien = new Model.clsLinhKien();
+            IEnumerable<tblLoaiLinhKien> dsLLK = loaiLinhKien.getAllLoaiLinhKien();
+            LoadLoaiLinhKienVaoTreeView(treeView, dsLLK);
         }
+
+        void LoadLoaiLinhKienVaoTreeView(TreeView treeView, IEnumerable<tblLoaiLinhKien> dsLLK)
+        {
+            nodeGoc.Nodes.Clear();
+            TreeNode nodeCon;
+            foreach (tblLoaiLinhKien llk in dsLLK)
+            {
+                nodeCon = new TreeNode();
+                nodeCon.Text = llk.tenLoaiLinhKien;
+                nodeCon.Tag = llk.maLoaiLinhKien;
+                nodeGoc.Nodes.Add(nodeCon);
+            }
+            treeView.Nodes.Add(nodeGoc);
+            treeView.ExpandAll();
+        }
+
         private void ResetValues()
         {
             txtMaLinhKien.Text = "";
+            txtMaLinhKien.Focus();
             txtTenLinhKien.Text = "";
             cboLoaiLinhKien.Text = "";
-            txtSoLuong.Text = "0";
-            txtDonGiaNhap.Text = "0";
-            txtDonGiaBan.Text = "0";
-            txtSoLuong.Enabled = true;
-            txtDonGiaNhap.Enabled = false;
-            txtDonGiaBan.Enabled = false;
-            txtAnh.Text = "";
-            picAnh.Image = null;
-            txtGhiChu.Text = "";
+            txtDonGiaNhap.Text = "";
+            txtSoLuong.Text = "";
         }
         private void LoadDataGridView()
         {
             string sql;
-            sql = "SELECT * from tblLinhKien";
+            sql = "SELECT tblLinhKien.maLinhKien, tblLinhKien.tenLinhKien, tblLinhKien.donGia, tblLinhKien.ngayNhap, tblLinhKien.soLuong," +
+                " tblNhaCungCap.tenNhaCungCap, tblLoaiLinhKien.tenLoaiLinhKien from tblLinhKien inner join tblNhaCungCap on tblLinhKien.maNhaCungCap = tblNhaCungCap.maNhaCungCap" +
+                " inner join tblLoaiLinhKien on tblLinhKien.maLoaiLinhKien = tblLoaiLinhKien.maLoaiLinhKien";
             tblH = clsConnectDB.GetDataToTable(sql);
             dgvHang.DataSource = tblH;
             dgvHang.Columns[0].HeaderText = "Mã Linh Kiện";
             dgvHang.Columns[1].HeaderText = "Tên Linh Kiện";
-            dgvHang.Columns[2].HeaderText = "Loại Linh Kiện";
-            dgvHang.Columns[3].HeaderText = "Số lượng";
-            dgvHang.Columns[4].HeaderText = "Đơn giá nhập";
-            dgvHang.Columns[5].HeaderText = "Đơn giá bán";
-            dgvHang.Columns[6].HeaderText = "Ảnh";
-            dgvHang.Columns[7].HeaderText = "Ghi chú";
-            dgvHang.Columns[0].Width = 80;
-            dgvHang.Columns[1].Width = 140;
-            dgvHang.Columns[2].Width = 80;
-            dgvHang.Columns[3].Width = 80;
-            dgvHang.Columns[4].Width = 100;
-            dgvHang.Columns[5].Width = 100;
-            dgvHang.Columns[6].Width = 200;
-            dgvHang.Columns[7].Width = 300;
+            dgvHang.Columns[2].HeaderText = "Đơn giá";
+            dgvHang.Columns[3].HeaderText = "Ngày nhập";
+            dgvHang.Columns[4].HeaderText = "Số lượng";
+            dgvHang.Columns[5].HeaderText = "Nhà cung cấp";
+            dgvHang.Columns[6].HeaderText = "Loại linh kiện";
+            dgvHang.Columns[0].Width = 100;
+            dgvHang.Columns[1].Width = 160;
+            dgvHang.Columns[2].Width = 90;
+            dgvHang.Columns[3].Width = 110;
+            dgvHang.Columns[4].Width = 90;
+            dgvHang.Columns[5].Width = 145;
+            dgvHang.Columns[6].Width = 120;
             dgvHang.AllowUserToAddRows = false;
             dgvHang.EditMode = DataGridViewEditMode.EditProgrammatically;
-        }
-
-        private void dgvHang_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            string MaLoaiLinhKien;
-            string sql;
-            if (btnThem.Enabled == false)
-            {
-                MessageBox.Show("Đang ở chế độ thêm mới!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                txtMaLinhKien.Focus();
-                return;
-            }
-            if (tblH.Rows.Count == 0)
-            {
-                MessageBox.Show("Không có dữ liệu!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return;
-            }
-            txtMaLinhKien.Text = dgvHang.CurrentRow.Cells["MaLinhKien"].Value.ToString();
-            txtTenLinhKien.Text = dgvHang.CurrentRow.Cells["TenLinhKien"].Value.ToString();
-            MaLoaiLinhKien = dgvHang.CurrentRow.Cells["maLoaiLinhKien"].Value.ToString();
-            sql = "SELECT tenLoaiLinhKien FROM tblLoaiLinhKien WHERE maLoaiLinhKien=N'" + MaLoaiLinhKien + "'";
-            cboLoaiLinhKien.Text = clsConnectDB.GetFieldValues(sql);
-            txtSoLuong.Text = dgvHang.CurrentRow.Cells["SoLuong"].Value.ToString();
-            txtDonGiaNhap.Text = dgvHang.CurrentRow.Cells["DonGiaNhap"].Value.ToString();
-            txtDonGiaBan.Text = dgvHang.CurrentRow.Cells["DonGiaBan"].Value.ToString();
-            sql = "SELECT Anh FROM tblLinhKien WHERE maLinhKien=N'" + txtMaLinhKien.Text + "'";
-            txtAnh.Text = clsConnectDB.GetFieldValues(sql);
-            picAnh.Image = Image.FromFile(txtAnh.Text);
-            sql = "SELECT ghiChu FROM tblLinhKien WHERE maLinhKien = N'" + txtMaLinhKien.Text + "'";
-            txtGhiChu.Text = clsConnectDB.GetFieldValues(sql);
-            btnSua.Enabled = true;
-            btnXoa.Enabled = true;
-            btnBoQua.Enabled = true;
         }
 
         private void btnThem_Click(object sender, EventArgs e)
@@ -113,12 +112,9 @@ namespace BaiTapLon_QuanLyLinhKien.View
             btnBoQua.Enabled = true;
             btnLuu.Enabled = true;
             btnThem.Enabled = false;
+            txtMaLinhKien.Enabled = false;
+            txtTenLinhKien.Focus();
             ResetValues();
-            txtMaLinhKien.Enabled = true;
-            txtMaLinhKien.Focus();
-            txtSoLuong.Enabled = true;
-            txtDonGiaNhap.Enabled = true;
-            txtDonGiaBan.Enabled = true;
         }
 
         private void btnXoa_Click(object sender, EventArgs e)
@@ -136,7 +132,7 @@ namespace BaiTapLon_QuanLyLinhKien.View
             }
             if (MessageBox.Show("Bạn có muốn xoá bản ghi này không?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
-                sql = "DELETE tblHang WHERE MaHang=N'" + txtMaLinhKien.Text + "'";
+                sql = "DELETE tblLinhKien WHERE maLinhKien=N'" + txtMaLinhKien.Text + "'";
                 clsConnectDB.RunSqlDel(sql);
                 LoadDataGridView();
                 ResetValues();
@@ -159,26 +155,17 @@ namespace BaiTapLon_QuanLyLinhKien.View
             }
             if (txtTenLinhKien.Text.Trim().Length == 0)
             {
-                MessageBox.Show("Bạn phải nhập tên hàng", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Bạn phải nhập tên linh kiện", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 txtTenLinhKien.Focus();
                 return;
             }
             if (cboLoaiLinhKien.Text.Trim().Length == 0)
             {
-                MessageBox.Show("Bạn phải nhập chất liệu", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Bạn phải nhập loại linh kiện", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 cboLoaiLinhKien.Focus();
                 return;
             }
-            if (txtAnh.Text.Trim().Length == 0)
-            {
-                MessageBox.Show("Bạn phải ảnh minh hoạ cho hàng", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                txtAnh.Focus();
-                return;
-            }
-            sql = "UPDATE tblHang SET TenHang=N'" + txtTenLinhKien.Text.Trim().ToString() +
-                 "',MaChatLieu=N'" + cboLoaiLinhKien.SelectedValue.ToString() +
-                "',SoLuong=" + txtSoLuong.Text +
-                ",Anh='" + txtAnh.Text + "',Ghichu=N'" + txtGhiChu.Text + "' WHERE MaHang=N'" + txtMaLinhKien.Text + "'";
+            sql = "UPDATE tblLinhKien SET tenLinhKien=N'" + txtTenLinhKien.Text.Trim().ToString() + "',maLoaiLinhKien=N'" + cboLoaiLinhKien.SelectedValue.ToString() + "',soLuong=" + txtSoLuong.Text + ",donGia=" + txtDonGiaNhap.Text +",ngayNhap='" + dtpNgayNhap.Value.ToString() + "' WHERE maLinhKien=N'" + txtMaLinhKien.Text + "'";
             clsConnectDB.RunSQL(sql);
             LoadDataGridView();
             ResetValues();
@@ -196,74 +183,35 @@ namespace BaiTapLon_QuanLyLinhKien.View
             txtMaLinhKien.Enabled = false;
         }
 
-        private void btnHienThi_Click(object sender, EventArgs e)
-        {
-            string sql;
-            sql = "SELECT MaHang,TenHang,MaChatLieu,SoLuong,DonGiaNhap,DonGiaBan,Anh,Ghichu FROM tblHang";
-            tblH = clsConnectDB.GetDataToTable(sql);
-            dgvHang.DataSource = tblH;
-        }
-
-        private void btnTimKiem_Click(object sender, EventArgs e)
-        {
-            string sql;
-            if ((txtMaLinhKien.Text == "") && (txtTenLinhKien.Text == ""))
-            {
-                MessageBox.Show("Bạn hãy nhập điều kiện tìm kiếm", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-            sql = "SELECT * from tblLinhKien WHERE 1=1";
-            if (txtMaLinhKien.Text != "")
-                sql += " AND maLinhKien LIKE N'%" + txtMaLinhKien.Text + "%'";
-            if (txtTenLinhKien.Text != "")
-                sql += " AND tenLinhKien LIKE N'%" + txtTenLinhKien.Text + "%'";
-            tblH = clsConnectDB.GetDataToTable(sql);
-            if (tblH.Rows.Count == 0)
-                MessageBox.Show("Không có bản ghi thoả mãn điều kiện tìm kiếm!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            else MessageBox.Show("Có " + tblH.Rows.Count + "  bản ghi thoả mãn điều kiện!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            dgvHang.DataSource = tblH;
-            ResetValues();
-        }
-
         private void btnLuu_Click(object sender, EventArgs e)
         {
             string sql;
-            if (txtMaLinhKien.Text.Trim().Length == 0)
+            /*if (txtMaLinhKien.Text.Trim().Length == 0)
             {
-                MessageBox.Show("Bạn phải nhập mã hàng", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Bạn phải nhập mã linh kiện", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 txtMaLinhKien.Focus();
                 return;
-            }
+            }*/
             if (txtTenLinhKien.Text.Trim().Length == 0)
             {
-                MessageBox.Show("Bạn phải nhập tên hàng", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Bạn phải nhập tên linh kiện", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 txtTenLinhKien.Focus();
                 return;
             }
             if (cboLoaiLinhKien.Text.Trim().Length == 0)
             {
-                MessageBox.Show("Bạn phải nhập chất liệu", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Bạn phải chọn loại linh kiện", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 cboLoaiLinhKien.Focus();
                 return;
             }
-            if (txtAnh.Text.Trim().Length == 0)
-            {
-                MessageBox.Show("Bạn phải chọn ảnh minh hoạ cho hàng", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                btnHienThi.Focus();
-                return;
-            }
-            sql = "SELECT MaHang FROM tblHang WHERE MaHang=N'" + txtMaLinhKien.Text.Trim() + "'";
+            sql = "SELECT maLinhKien FROM tblLinhKien WHERE maLinhKien=N'" + txtMaLinhKien.Text.Trim() + "'";
             if (clsConnectDB.CheckKey(sql))
             {
-                MessageBox.Show("Mã hàng này đã tồn tại, bạn phải chọn mã hàng khác", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Mã linh kiện này đã tồn tại, bạn phải chọn mã khác", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 txtMaLinhKien.Focus();
                 return;
             }
-            sql = "INSERT INTO tblHang(MaHang,TenHang,SoLuong,DonGiaNhap, DonGiaBan,Anh,Ghichu) VALUES(N'"
-                + txtMaLinhKien.Text.Trim() + "',N'" + txtTenLinhKien.Text.Trim() +
-                "',N'" + cboLoaiLinhKien.SelectedValue.ToString() +
-                "'," + txtSoLuong.Text.Trim() + "," + txtDonGiaNhap.Text +
-                "," + txtDonGiaBan.Text + ",'" + txtAnh.Text + "',N'" + txtGhiChu.Text.Trim() + "')";
+            sql = "INSERT INTO tblLinhKien(tenLinhKien,maLoaiLinhKien,soLuong,donGia,ngayNhap,maNhaCungCap) VALUES(N'" + txtTenLinhKien.Text.Trim() +"',N'" + cboLoaiLinhKien.SelectedValue.ToString() +"'," + txtSoLuong.Text.Trim() + "," + txtDonGiaNhap.Text +", '" + dtpNgayNhap.Value.ToString("yyyy/MM/dd") + "', " + 1 +")";
 
             clsConnectDB.RunSQL(sql);
             LoadDataGridView();
@@ -281,16 +229,69 @@ namespace BaiTapLon_QuanLyLinhKien.View
             this.Close();
         }
 
-        private void btnOpen_Click(object sender, EventArgs e)
+        private void dgvHang_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            OpenFileDialog dlgOpen = new OpenFileDialog();
-            dlgOpen.Filter = "Bitmap(*.bmp)|*.bmp|JPEG(*.jpg)|*.jpg|GIF(*.gif)|*.gif|All files(*.*)|*.*";
-            dlgOpen.FilterIndex = 2;
-            dlgOpen.Title = "Chọn ảnh minh hoạ cho sản phẩm";
-            if (dlgOpen.ShowDialog() == DialogResult.OK)
+            string MaLoaiLinhKien;
+            string sql;
+            if (btnThem.Enabled == false)
             {
-                picAnh.Image = Image.FromFile(dlgOpen.FileName);
-                txtAnh.Text = dlgOpen.FileName;
+                MessageBox.Show("Đang ở chế độ thêm mới!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                txtMaLinhKien.Focus();
+                return;
+            }
+            if (tblH.Rows.Count == 0)
+            {
+                MessageBox.Show("Không có dữ liệu!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+            txtMaLinhKien.Text = dgvHang.CurrentRow.Cells["MaLinhKien"].Value.ToString();
+            txtTenLinhKien.Text = dgvHang.CurrentRow.Cells["TenLinhKien"].Value.ToString();
+            cboLoaiLinhKien.Text = dgvHang.CurrentRow.Cells["TenLoaiLinhKien"].Value.ToString();
+            txtDonGiaNhap.Text = dgvHang.CurrentRow.Cells["DonGia"].Value.ToString();
+            txtSoLuong.Text = dgvHang.CurrentRow.Cells["SoLuong"].Value.ToString();
+            dtpNgayNhap.Value = Convert.ToDateTime(dgvHang.CurrentRow.Cells["NgayNhap"].Value.ToString());
+            btnSua.Enabled = true;
+            btnXoa.Enabled = true;
+            txtMaLinhKien.Enabled = false;
+        }
+
+        private void treeView_AfterSelect(object sender, TreeViewEventArgs e)
+        {
+            IEnumerable<tblLinhKien> dsLK;
+            string maLoaiLinhKien = "";
+            if (treeView.SelectedNode != null)
+            {
+                if (treeView.SelectedNode.Level == 0)
+                {
+                    maLoaiLinhKien = "";
+                }
+                else
+                {
+                    maLoaiLinhKien = treeView.SelectedNode.Tag.ToString();
+                }
+
+                string sql;
+                sql = "SELECT tblLinhKien.maLinhKien, tblLinhKien.tenLinhKien, tblLinhKien.donGia, tblLinhKien.ngayNhap, tblLinhKien.soLuong," +
+                    " tblNhaCungCap.tenNhaCungCap, tblLoaiLinhKien.tenLoaiLinhKien from tblLinhKien inner join tblNhaCungCap on tblLinhKien.maNhaCungCap = tblNhaCungCap.maNhaCungCap" +
+                    " inner join tblLoaiLinhKien on tblLinhKien.maLoaiLinhKien = tblLoaiLinhKien.maLoaiLinhKien where tblLinhKien.maLinhKien=" + maLoaiLinhKien;
+                tblH = clsConnectDB.GetDataToTable(sql);
+                dgvHang.DataSource = tblH;
+                dgvHang.Columns[0].HeaderText = "Mã Linh Kiện";
+                dgvHang.Columns[1].HeaderText = "Tên Linh Kiện";
+                dgvHang.Columns[2].HeaderText = "Đơn giá";
+                dgvHang.Columns[3].HeaderText = "Ngày nhập";
+                dgvHang.Columns[4].HeaderText = "Số lượng";
+                dgvHang.Columns[5].HeaderText = "Nhà cung cấp";
+                dgvHang.Columns[6].HeaderText = "Loại linh kiện";
+                dgvHang.Columns[0].Width = 100;
+                dgvHang.Columns[1].Width = 160;
+                dgvHang.Columns[2].Width = 90;
+                dgvHang.Columns[3].Width = 110;
+                dgvHang.Columns[4].Width = 90;
+                dgvHang.Columns[5].Width = 145;
+                dgvHang.Columns[6].Width = 120;
+                dgvHang.AllowUserToAddRows = false;
+                dgvHang.EditMode = DataGridViewEditMode.EditProgrammatically;
             }
         }
     }

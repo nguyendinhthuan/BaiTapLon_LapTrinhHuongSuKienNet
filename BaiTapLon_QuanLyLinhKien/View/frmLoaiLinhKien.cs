@@ -37,15 +37,13 @@ namespace BaiTapLon_QuanLyLinhKien.View
             dgvLoaiLinhKien.Columns[0].HeaderText = "Mã";
             dgvLoaiLinhKien.Columns[1].HeaderText = "Tên";
             dgvLoaiLinhKien.Columns[0].Width = 100;
-            dgvLoaiLinhKien.Columns[1].Width = 300;
+            dgvLoaiLinhKien.Columns[1].Width = 340;
             dgvLoaiLinhKien.AllowUserToAddRows = false; //Không cho người dùng thêm dữ liệu trực tiếp
             dgvLoaiLinhKien.EditMode = DataGridViewEditMode.EditProgrammatically; //Không cho sửa dữ liệu trực tiếp
         }
 
         private void btnThem_Click(object sender, EventArgs e)
         {
-            txtMaLinhKien.Enabled = true; //cho phép nhập mới
-            txtMaLinhKien.Focus();
             btnSua.Enabled = false;
             btnXoa.Enabled = false;
             btnBoQua.Enabled = true;
@@ -62,12 +60,12 @@ namespace BaiTapLon_QuanLyLinhKien.View
         private void btnLuu_Click(object sender, EventArgs e)
         {
             string sql; //Lưu lệnh sql
-            if (txtMaLinhKien.Text.Trim().Length == 0) //Nếu chưa nhập mã chất liệu
+            /*if (txtMaLinhKien.Text.Trim().Length == 0) //Nếu chưa nhập mã chất liệu
             {
                 MessageBox.Show("Bạn phải nhập mã loại linh kiện", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 txtMaLinhKien.Focus();
                 return;
-            }
+            }*/
             if (txtTenLinhKien.Text.Trim().Length == 0) //Nếu chưa nhập tên chất liệu
             {
                 MessageBox.Show("Bạn phải nhập tên loại linh kiện", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -82,8 +80,7 @@ namespace BaiTapLon_QuanLyLinhKien.View
                 return;
             }
 
-            sql = "INSERT INTO tblLoaiLinhKien VALUES(N'" +
-                txtMaLinhKien.Text + "',N'" + txtTenLinhKien.Text + "')";
+            sql = "INSERT INTO tblLoaiLinhKien VALUES(N'" + txtTenLinhKien.Text + "')";
             clsConnectDB.RunSQL(sql); //Thực hiện câu lệnh sql
             LoadDataGridView(); //Nạp lại DataGridView
             ResetValue();

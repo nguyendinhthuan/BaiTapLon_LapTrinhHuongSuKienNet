@@ -11,7 +11,16 @@ namespace BaiTapLon_QuanLyLinhKien.ConnectDatabase
 {
     class clsConnectDB
     {
-        public static SqlConnection Con;  //Khai báo đối tượng kết nối        
+        public static SqlConnection Con;  //Khai báo đối tượng kết nối  
+        qlLinhKienDataContext dt;
+
+        public qlLinhKienDataContext GetDataContext()
+        {
+            String str = @"Data Source=LAPTOP-A77BJ5G6\SQLEXPRESS;Initial Catalog=QuanLyLinhKien;Integrated Security=True";
+            dt = new qlLinhKienDataContext(str);
+            dt.Connection.Open();
+            return dt;
+        }
 
         public static void Connect()
         {
