@@ -273,7 +273,7 @@ namespace BaiTapLon_QuanLyLinhKien.View
                 string sql;
                 sql = "SELECT tblLinhKien.maLinhKien, tblLinhKien.tenLinhKien, tblLinhKien.donGia, tblLinhKien.ngayNhap, tblLinhKien.soLuong," +
                     " tblNhaCungCap.tenNhaCungCap, tblLoaiLinhKien.tenLoaiLinhKien from tblLinhKien inner join tblNhaCungCap on tblLinhKien.maNhaCungCap = tblNhaCungCap.maNhaCungCap" +
-                    " inner join tblLoaiLinhKien on tblLinhKien.maLoaiLinhKien = tblLoaiLinhKien.maLoaiLinhKien where tblLinhKien.maLinhKien=" + maLoaiLinhKien;
+                    " inner join tblLoaiLinhKien on tblLinhKien.maLoaiLinhKien = tblLoaiLinhKien.maLoaiLinhKien where tblLoaiLinhKien.maLoaiLinhKien='" + maLoaiLinhKien + "'";
                 tblH = clsConnectDB.GetDataToTable(sql);
                 dgvHang.DataSource = tblH;
                 dgvHang.Columns[0].HeaderText = "Mã Linh Kiện";
