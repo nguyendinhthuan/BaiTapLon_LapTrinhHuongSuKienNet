@@ -57,14 +57,14 @@
             // 
             // txtTenLinhKien
             // 
-            this.txtTenLinhKien.Location = new System.Drawing.Point(176, 116);
+            this.txtTenLinhKien.Location = new System.Drawing.Point(174, 116);
             this.txtTenLinhKien.Name = "txtTenLinhKien";
             this.txtTenLinhKien.Size = new System.Drawing.Size(259, 26);
             this.txtTenLinhKien.TabIndex = 9;
             // 
             // txtMaLinhKien
             // 
-            this.txtMaLinhKien.Location = new System.Drawing.Point(176, 64);
+            this.txtMaLinhKien.Location = new System.Drawing.Point(174, 59);
             this.txtMaLinhKien.Name = "txtMaLinhKien";
             this.txtMaLinhKien.Size = new System.Drawing.Size(259, 26);
             this.txtMaLinhKien.TabIndex = 10;

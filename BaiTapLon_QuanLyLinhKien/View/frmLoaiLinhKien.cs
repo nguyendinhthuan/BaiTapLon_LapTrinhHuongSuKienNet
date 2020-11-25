@@ -49,6 +49,7 @@ namespace BaiTapLon_QuanLyLinhKien.View
             btnBoQua.Enabled = true;
             btnLuu.Enabled = true;
             btnThem.Enabled = false;
+            txtMaLinhKien.Enabled = true;
             ResetValue(); //Xoá trắng các textbox
         }
         private void ResetValue()
@@ -60,12 +61,12 @@ namespace BaiTapLon_QuanLyLinhKien.View
         private void btnLuu_Click(object sender, EventArgs e)
         {
             string sql; //Lưu lệnh sql
-            /*if (txtMaLinhKien.Text.Trim().Length == 0) //Nếu chưa nhập mã chất liệu
+            if (txtMaLinhKien.Text.Trim().Length == 0) //Nếu chưa nhập mã chất liệu
             {
                 MessageBox.Show("Bạn phải nhập mã loại linh kiện", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 txtMaLinhKien.Focus();
                 return;
-            }*/
+            }
             if (txtTenLinhKien.Text.Trim().Length == 0) //Nếu chưa nhập tên chất liệu
             {
                 MessageBox.Show("Bạn phải nhập tên loại linh kiện", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -80,7 +81,7 @@ namespace BaiTapLon_QuanLyLinhKien.View
                 return;
             }
 
-            sql = "INSERT INTO tblLoaiLinhKien VALUES(N'" + txtTenLinhKien.Text + "')";
+            sql = "INSERT INTO tblLoaiLinhKien VALUES(N'" + txtMaLinhKien.Text + "',N'" + txtTenLinhKien.Text + "')";
             clsConnectDB.RunSQL(sql); //Thực hiện câu lệnh sql
             LoadDataGridView(); //Nạp lại DataGridView
             ResetValue();

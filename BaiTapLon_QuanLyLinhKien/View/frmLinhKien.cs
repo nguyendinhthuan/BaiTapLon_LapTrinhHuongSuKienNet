@@ -26,6 +26,8 @@ namespace BaiTapLon_QuanLyLinhKien.View
 
         DataTable tblLinhKien { get; set; }
 
+        DataTable tblNhaCungCap { get; set; }
+
         TreeNode nodeGoc;
         Model.clsLoaiLinhKien loaiLinhKien;
         Model.clsLinhKien linhKien;
@@ -39,7 +41,13 @@ namespace BaiTapLon_QuanLyLinhKien.View
             cboLoaiLinhKien.DataSource = tblLoaiLinhKien;
             cboLoaiLinhKien.ValueMember = "maLoaiLinhKien"; //Trường giá trị
             cboLoaiLinhKien.DisplayMember = "tenLoaiLinhKien"; //Trường hiển thị
-            
+
+            sql = "SELECT maNhaCungCap, tenNhaCungCap from tblNhaCungCap";
+            tblNhaCungCap = clsConnectDB.GetDataToTable(sql);
+            cboNhaCungCap.DataSource = tblNhaCungCap;
+            cboNhaCungCap.ValueMember = "maNhaCungCap"; //Trường giá trị
+            cboNhaCungCap.DisplayMember = "tenNhaCungCap"; //Trường hiển thị
+
             btnLuu.Enabled = false;
             btnBoQua.Enabled = false;
             btnSua.Enabled = false;
@@ -47,6 +55,13 @@ namespace BaiTapLon_QuanLyLinhKien.View
             LoadDataGridView();
             //cboLoaiLinhKien.SelectedIndex = -1;
             ResetValues();
+            txtMaLinhKien.Enabled = false;
+            txtTenLinhKien.Enabled = false;
+            cboLoaiLinhKien.Enabled = false;
+            txtSoLuong.Enabled = false;
+            txtDonGiaNhap.Enabled = false;
+            cboNhaCungCap.Enabled = false;
+            cboNhaCungCap.Text = "";
 
             nodeGoc = new TreeNode("Danh sách loại linh kiện");
             loaiLinhKien = new Model.clsLoaiLinhKien();
@@ -113,6 +128,12 @@ namespace BaiTapLon_QuanLyLinhKien.View
             btnLuu.Enabled = true;
             btnThem.Enabled = false;
             txtMaLinhKien.Enabled = false;
+            txtTenLinhKien.Enabled = true;
+            cboLoaiLinhKien.Enabled = true;
+            txtSoLuong.Enabled = true;
+            txtDonGiaNhap.Enabled = true;
+            cboNhaCungCap.Enabled = true;
+            cboNhaCungCap.Text = "";
             txtTenLinhKien.Focus();
             ResetValues();
         }

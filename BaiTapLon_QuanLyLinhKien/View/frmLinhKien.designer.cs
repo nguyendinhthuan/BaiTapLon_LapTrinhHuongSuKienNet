@@ -50,13 +50,15 @@
             this.treeView = new System.Windows.Forms.TreeView();
             this.label6 = new System.Windows.Forms.Label();
             this.dtpNgayNhap = new System.Windows.Forms.DateTimePicker();
+            this.label7 = new System.Windows.Forms.Label();
+            this.cboNhaCungCap = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvHang)).BeginInit();
             this.SuspendLayout();
             // 
             // cboLoaiLinhKien
             // 
             this.cboLoaiLinhKien.FormattingEnabled = true;
-            this.cboLoaiLinhKien.Location = new System.Drawing.Point(656, 116);
+            this.cboLoaiLinhKien.Location = new System.Drawing.Point(656, 114);
             this.cboLoaiLinhKien.Name = "cboLoaiLinhKien";
             this.cboLoaiLinhKien.Size = new System.Drawing.Size(245, 28);
             this.cboLoaiLinhKien.TabIndex = 37;
@@ -73,7 +75,7 @@
             // 
             // txtDonGiaNhap
             // 
-            this.txtDonGiaNhap.Location = new System.Drawing.Point(656, 190);
+            this.txtDonGiaNhap.Location = new System.Drawing.Point(656, 186);
             this.txtDonGiaNhap.Name = "txtDonGiaNhap";
             this.txtDonGiaNhap.Size = new System.Drawing.Size(245, 26);
             this.txtDonGiaNhap.TabIndex = 21;
@@ -81,7 +83,7 @@
             // 
             // txtSoLuong
             // 
-            this.txtSoLuong.Location = new System.Drawing.Point(656, 154);
+            this.txtSoLuong.Location = new System.Drawing.Point(656, 151);
             this.txtSoLuong.Name = "txtSoLuong";
             this.txtSoLuong.Size = new System.Drawing.Size(245, 26);
             this.txtSoLuong.TabIndex = 20;
@@ -89,7 +91,7 @@
             // 
             // txtTenLinhKien
             // 
-            this.txtTenLinhKien.Location = new System.Drawing.Point(656, 82);
+            this.txtTenLinhKien.Location = new System.Drawing.Point(656, 81);
             this.txtTenLinhKien.Name = "txtTenLinhKien";
             this.txtTenLinhKien.Size = new System.Drawing.Size(245, 26);
             this.txtTenLinhKien.TabIndex = 19;
@@ -105,7 +107,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(533, 196);
+            this.label5.Location = new System.Drawing.Point(533, 192);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(64, 20);
             this.label5.TabIndex = 14;
@@ -114,7 +116,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(533, 160);
+            this.label4.Location = new System.Drawing.Point(533, 157);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(72, 20);
             this.label4.TabIndex = 13;
@@ -123,7 +125,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(533, 124);
+            this.label9.Location = new System.Drawing.Point(533, 122);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(100, 20);
             this.label9.TabIndex = 12;
@@ -132,7 +134,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(533, 88);
+            this.label3.Location = new System.Drawing.Point(533, 87);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(97, 20);
             this.label3.TabIndex = 11;
@@ -243,7 +245,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(533, 232);
+            this.label6.Location = new System.Drawing.Point(533, 227);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(85, 20);
             this.label6.TabIndex = 14;
@@ -253,10 +255,27 @@
             // 
             this.dtpNgayNhap.CustomFormat = "yyyy/DD/MM";
             this.dtpNgayNhap.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpNgayNhap.Location = new System.Drawing.Point(656, 226);
+            this.dtpNgayNhap.Location = new System.Drawing.Point(656, 221);
             this.dtpNgayNhap.Name = "dtpNgayNhap";
             this.dtpNgayNhap.Size = new System.Drawing.Size(245, 26);
             this.dtpNgayNhap.TabIndex = 46;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(533, 262);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(107, 20);
+            this.label7.TabIndex = 14;
+            this.label7.Text = "Nhà cung cấp";
+            // 
+            // cboNhaCungCap
+            // 
+            this.cboNhaCungCap.FormattingEnabled = true;
+            this.cboNhaCungCap.Location = new System.Drawing.Point(656, 254);
+            this.cboNhaCungCap.Name = "cboNhaCungCap";
+            this.cboNhaCungCap.Size = new System.Drawing.Size(245, 28);
+            this.cboNhaCungCap.TabIndex = 37;
             // 
             // frmLinhKien
             // 
@@ -271,12 +290,14 @@
             this.Controls.Add(this.btnXoa);
             this.Controls.Add(this.btnSua);
             this.Controls.Add(this.btnThem);
+            this.Controls.Add(this.cboNhaCungCap);
             this.Controls.Add(this.cboLoaiLinhKien);
             this.Controls.Add(this.dgvHang);
             this.Controls.Add(this.txtDonGiaNhap);
             this.Controls.Add(this.txtSoLuong);
             this.Controls.Add(this.txtTenLinhKien);
             this.Controls.Add(this.txtMaLinhKien);
+            this.Controls.Add(this.label7);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
@@ -318,5 +339,7 @@
         private System.Windows.Forms.TreeView treeView;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.DateTimePicker dtpNgayNhap;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.ComboBox cboNhaCungCap;
     }
 }
