@@ -1417,6 +1417,8 @@ namespace BaiTapLon_QuanLyLinhKien
 		
 		private System.Nullable<int> _maNhanVien;
 		
+		private string _quyen;
+		
 		private EntityRef<tblNhanVien> _tblNhanVien;
 		
     #region Extensibility Method Definitions
@@ -1431,6 +1433,8 @@ namespace BaiTapLon_QuanLyLinhKien
     partial void OnmatKhauChanged();
     partial void OnmaNhanVienChanging(System.Nullable<int> value);
     partial void OnmaNhanVienChanged();
+    partial void OnquyenChanging(string value);
+    partial void OnquyenChanged();
     #endregion
 		
 		public tblTaiKhoan()
@@ -1519,6 +1523,26 @@ namespace BaiTapLon_QuanLyLinhKien
 					this._maNhanVien = value;
 					this.SendPropertyChanged("maNhanVien");
 					this.OnmaNhanVienChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_quyen", DbType="NVarChar(50)")]
+		public string quyen
+		{
+			get
+			{
+				return this._quyen;
+			}
+			set
+			{
+				if ((this._quyen != value))
+				{
+					this.OnquyenChanging(value);
+					this.SendPropertyChanging();
+					this._quyen = value;
+					this.SendPropertyChanged("quyen");
+					this.OnquyenChanged();
 				}
 			}
 		}

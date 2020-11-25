@@ -189,8 +189,9 @@
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "frmTimKiemHoaDon";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Tìm Kiếm Hóa Đơn";
-            this.Load += new System.EventHandler(this.frmTimKiemLinhKienBan_Load);
+            this.Load += new System.EventHandler(this.frmTimKiemHoaDon_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvTimKiemHoaDon)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

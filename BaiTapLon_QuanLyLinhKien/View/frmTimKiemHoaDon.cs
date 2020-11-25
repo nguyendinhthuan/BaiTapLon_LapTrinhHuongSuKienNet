@@ -21,13 +21,6 @@ namespace BaiTapLon_QuanLyLinhKien.View
 
         DataTable tblHD;
 
-        private void frmTimKiemLinhKienBan_Load(object sender, EventArgs e)
-        {
-            ResetValues();
-            dgvTimKiemHoaDon.DataSource = null;
-            LoadTatCaHoaDon();
-        }
-
         private void ResetValues()
         {
             foreach (Control Ctl in this.Controls)
@@ -137,6 +130,14 @@ namespace BaiTapLon_QuanLyLinhKien.View
 
         private void btnTatCa_Click(object sender, EventArgs e)
         {
+            LoadTatCaHoaDon();
+        }
+
+        private void frmTimKiemHoaDon_Load(object sender, EventArgs e)
+        {
+            //ResetValues();
+            txtMaHoaDon.Focus();
+            dgvTimKiemHoaDon.DataSource = null;
             LoadTatCaHoaDon();
         }
     }

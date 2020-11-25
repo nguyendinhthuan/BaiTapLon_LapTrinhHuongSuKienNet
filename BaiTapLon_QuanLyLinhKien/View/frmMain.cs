@@ -12,11 +12,20 @@ namespace BaiTapLon_QuanLyLinhKien.View
 {
     public partial class frmMain : Form
     {
+        string maTaiKhoan = "", tenTaiKhoan = "", matKhau = "", maNhanVien = "", quyen = "";
         public frmMain()
         {
             InitializeComponent();
         }
-
+        public frmMain(string maTaiKhoan, string tenTaiKhoan, string matKhau, string maNhanVien, string quyen)
+        {
+            InitializeComponent();
+            this.maTaiKhoan = maTaiKhoan;
+            this.tenTaiKhoan = tenTaiKhoan;
+            this.matKhau = matKhau;
+            this.maNhanVien = maNhanVien;
+            this.quyen = quyen;
+        }
         private void frmMain_Load(object sender, EventArgs e)
         {
             statusStrip1.Items[2].Text = "Ngày: " + DateTime.Now.ToString("dd/MM/yyyy");
@@ -41,10 +50,23 @@ namespace BaiTapLon_QuanLyLinhKien.View
             frm.Show();
         }
 
+        private void đăngXuấtToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmDangNhap frm = new frmDangNhap();
+            frm.Show();
+            this.Hide();
+        }
+
         private void mnuDanhMucNhanVien_Click(object sender, EventArgs e)
         {
+            if(quyen == "admin") { 
             frmNhanVien frm = new frmNhanVien();
             frm.Show();
+            }
+            else
+            {
+                MessageBox.Show("Chức năng này chỉ dành cho Admin!");
+            }
         }
 
         private void mnuDanhMucHangHoa_Click(object sender, EventArgs e)

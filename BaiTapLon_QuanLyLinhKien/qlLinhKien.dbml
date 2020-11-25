@@ -78,6 +78,7 @@
       <Column Name="tenTaiKhoan" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="matKhau" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="maNhanVien" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="quyen" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Association Name="tblNhanVien_tblTaiKhoan" Member="tblNhanVien" ThisKey="maNhanVien" OtherKey="maNhanVien" Type="tblNhanVien" IsForeignKey="true" />
     </Type>
   </Table>
