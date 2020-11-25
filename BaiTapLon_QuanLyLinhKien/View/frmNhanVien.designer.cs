@@ -149,6 +149,7 @@
             this.dgvNhanVien.Location = new System.Drawing.Point(5, 198);
             this.dgvNhanVien.Name = "dgvNhanVien";
             this.dgvNhanVien.RowHeadersWidth = 51;
+            this.dgvNhanVien.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvNhanVien.Size = new System.Drawing.Size(883, 163);
             this.dgvNhanVien.TabIndex = 4;
             this.dgvNhanVien.Click += new System.EventHandler(this.dgvNhanVien_Click);

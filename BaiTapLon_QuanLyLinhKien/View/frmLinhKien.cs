@@ -48,7 +48,7 @@ namespace BaiTapLon_QuanLyLinhKien.View
             //cboLoaiLinhKien.SelectedIndex = -1;
             ResetValues();
 
-            nodeGoc = new TreeNode("Danh sách linh kiện");
+            nodeGoc = new TreeNode("Danh sách loại linh kiện");
             loaiLinhKien = new Model.clsLoaiLinhKien();
             linhKien = new Model.clsLinhKien();
             IEnumerable<tblLoaiLinhKien> dsLLK = loaiLinhKien.getAllLoaiLinhKien();

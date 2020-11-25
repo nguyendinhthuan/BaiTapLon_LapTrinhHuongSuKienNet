@@ -60,6 +60,7 @@
             this.dgvKhachHang.Location = new System.Drawing.Point(26, 239);
             this.dgvKhachHang.Name = "dgvKhachHang";
             this.dgvKhachHang.RowHeadersWidth = 51;
+            this.dgvKhachHang.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvKhachHang.Size = new System.Drawing.Size(882, 155);
             this.dgvKhachHang.TabIndex = 8;
             this.dgvKhachHang.Click += new System.EventHandler(this.dgvKhachHang_Click);
