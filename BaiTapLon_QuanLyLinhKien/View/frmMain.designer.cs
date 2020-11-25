@@ -29,8 +29,6 @@
         private void InitializeComponent()
         {
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.mnuChucNang = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuChucNangThoat = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuDanhMuc = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuDanhMucLoaiLinhKien = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuDanhMucNhanVien = new System.Windows.Forms.ToolStripMenuItem();
@@ -55,7 +53,6 @@
             this.menuStrip1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
             this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mnuChucNang,
             this.mnuDanhMuc,
             this.mnuHoaDon,
             this.mnuTimKiem,
@@ -67,24 +64,6 @@
             this.menuStrip1.TabIndex = 2;
             this.menuStrip1.Text = "menuStrip1";
             // 
-            // mnuChucNang
-            // 
-            this.mnuChucNang.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mnuChucNangThoat});
-            this.mnuChucNang.Name = "mnuChucNang";
-            this.mnuChucNang.Size = new System.Drawing.Size(98, 24);
-            this.mnuChucNang.Text = "Chức năng";
-            // 
-            // mnuChucNangThoat
-            // 
-            this.mnuChucNangThoat.Name = "mnuChucNangThoat";
-            this.mnuChucNangThoat.ShortcutKeys = ((System.Windows.Forms.Keys)((((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Alt) 
-            | System.Windows.Forms.Keys.Shift) 
-            | System.Windows.Forms.Keys.O)));
-            this.mnuChucNangThoat.Size = new System.Drawing.Size(243, 24);
-            this.mnuChucNangThoat.Text = "Thoát";
-            this.mnuChucNangThoat.Click += new System.EventHandler(this.mnuChucNangThoat_Click);
-            // 
             // mnuDanhMuc
             // 
             this.mnuDanhMuc.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -93,8 +72,8 @@
             this.mnuDanhMucHangHoa,
             this.mnuDanhMucKhachHang});
             this.mnuDanhMuc.Name = "mnuDanhMuc";
-            this.mnuDanhMuc.Size = new System.Drawing.Size(94, 24);
-            this.mnuDanhMuc.Text = "Danh mục";
+            this.mnuDanhMuc.Size = new System.Drawing.Size(80, 24);
+            this.mnuDanhMuc.Text = "Quản Lý";
             // 
             // mnuDanhMucLoaiLinhKien
             // 
@@ -127,15 +106,15 @@
             // mnuHoaDon
             // 
             this.mnuHoaDon.Name = "mnuHoaDon";
-            this.mnuHoaDon.Size = new System.Drawing.Size(85, 24);
-            this.mnuHoaDon.Text = "Hóa Đơn";
+            this.mnuHoaDon.Size = new System.Drawing.Size(116, 24);
+            this.mnuHoaDon.Text = "Lập Hóa Đơn";
             this.mnuHoaDon.Click += new System.EventHandler(this.mnuHoaDon_Click);
             // 
             // mnuTimKiem
             // 
             this.mnuTimKiem.Name = "mnuTimKiem";
-            this.mnuTimKiem.Size = new System.Drawing.Size(85, 24);
-            this.mnuTimKiem.Text = "Tìm Kiếm";
+            this.mnuTimKiem.Size = new System.Drawing.Size(153, 24);
+            this.mnuTimKiem.Text = "Tìm Kiếm Hóa Đơn";
             this.mnuTimKiem.Click += new System.EventHandler(this.mnuTimKiem_Click);
             // 
             // mnuTroGiup
@@ -240,8 +219,6 @@
         #endregion
 
         private System.Windows.Forms.MenuStrip menuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem mnuChucNang;
-        private System.Windows.Forms.ToolStripMenuItem mnuChucNangThoat;
         private System.Windows.Forms.ToolStripMenuItem mnuDanhMuc;
         private System.Windows.Forms.ToolStripMenuItem mnuDanhMucLoaiLinhKien;
         private System.Windows.Forms.ToolStripMenuItem mnuDanhMucNhanVien;

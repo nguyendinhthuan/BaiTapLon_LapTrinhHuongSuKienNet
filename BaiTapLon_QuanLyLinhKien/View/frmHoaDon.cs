@@ -18,19 +18,23 @@ namespace BaiTapLon_QuanLyLinhKien.View
         {
             InitializeComponent();
         }
+
         Model.clsChiTietHoaDon CTHD = new Model.clsChiTietHoaDon();
         Model.clsLISTChiTietHoaDon dsCTHD = new Model.clsLISTChiTietHoaDon();
 
         DataTable tblChiTietHoaDon { get; set; }
+
         DataTable tblNhanVien { get; set; }
+
         DataTable tblLinhKien { get; set; }
+
         private void frmHoaDon_Load(object sender, EventArgs e)
         {
+            //LoadInfoHoaDon();
             string str;
             string sql;
             btnThemHoaDon.Enabled = true;
             btnLuuHoaDon.Enabled = false;
-            btnInHoaDon.Enabled = false;
             btnThem.Enabled = false;
             txtThanhTien.Text = "0";
             txtGiamGia.Text = "0";
@@ -76,7 +80,6 @@ namespace BaiTapLon_QuanLyLinhKien.View
         {
             btnThem.Enabled = true;
             btnLuuHoaDon.Enabled = true;
-            btnInHoaDon.Enabled = false;
             btnThemHoaDon.Enabled = false;
             cboMaNhanVien.Enabled = true;
             cboMaKhach.Enabled = true;
@@ -126,7 +129,6 @@ namespace BaiTapLon_QuanLyLinhKien.View
             }
             ResetValuesHang();
             btnThemHoaDon.Enabled = true;
-            btnInHoaDon.Enabled = true;
         }
         private void ResetValuesHang()
         {
@@ -295,6 +297,20 @@ namespace BaiTapLon_QuanLyLinhKien.View
                 tongtienhoadon += float.Parse(dgvHoaDon.Rows[i].Cells["Column5"].Value.ToString());
             }
             txtTongTienHoaDon.Text = tongtienhoadon.ToString("#,### VNĐ");
+        }
+
+        public void LoadInfoHoaDon()
+        {
+            string str;
+            cboMaKhach.Enabled = true;
+            cboMaNhanVien.Enabled = true;
+            str = "SELECT ngayBanHang FROM tblHoaDon WHERE ghiChu = N'" + txtGhiChu.Text + "'";
+            dtpNgayBan.Text = clsConnectDB.ConvertDateTime(clsConnectDB.GetFieldValues(str));
+
+            str = "SELECT maNhanvien FROM tblHoaDon WHERE ghiChu = N'" + txtGhiChu.Text + "'";
+            cboMaNhanVien.Text = clsConnectDB.GetFieldValues(str);
+            str = "SELECT maKhachHang FROM tblHoaDon WHERE ghiChu = N'" + txtGhiChu.Text + "'";
+            cboMaKhach.Text = clsConnectDB.GetFieldValues(str);
         }
     }
 }

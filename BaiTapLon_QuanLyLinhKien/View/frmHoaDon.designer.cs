@@ -32,7 +32,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.lblBangChu = new System.Windows.Forms.Label();
-            this.btnInHoaDon = new System.Windows.Forms.Button();
             this.btnDong = new System.Windows.Forms.Button();
             this.btnLuuHoaDon = new System.Windows.Forms.Button();
             this.btnThemHoaDon = new System.Windows.Forms.Button();
@@ -91,7 +90,6 @@
             // panel2
             // 
             this.panel2.Controls.Add(this.lblBangChu);
-            this.panel2.Controls.Add(this.btnInHoaDon);
             this.panel2.Controls.Add(this.btnDong);
             this.panel2.Controls.Add(this.btnLuuHoaDon);
             this.panel2.Controls.Add(this.btnThemHoaDon);
@@ -111,25 +109,13 @@
             this.lblBangChu.Size = new System.Drawing.Size(0, 20);
             this.lblBangChu.TabIndex = 19;
             // 
-            // btnInHoaDon
-            // 
-            this.btnInHoaDon.Image = ((System.Drawing.Image)(resources.GetObject("btnInHoaDon.Image")));
-            this.btnInHoaDon.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnInHoaDon.Location = new System.Drawing.Point(584, 43);
-            this.btnInHoaDon.Name = "btnInHoaDon";
-            this.btnInHoaDon.Size = new System.Drawing.Size(174, 40);
-            this.btnInHoaDon.TabIndex = 17;
-            this.btnInHoaDon.Text = "&In Hóa Đơn";
-            this.btnInHoaDon.UseVisualStyleBackColor = true;
-            this.btnInHoaDon.Click += new System.EventHandler(this.btnInHoaDon_Click);
-            // 
             // btnDong
             // 
             this.btnDong.Image = ((System.Drawing.Image)(resources.GetObject("btnDong.Image")));
             this.btnDong.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnDong.Location = new System.Drawing.Point(864, 43);
+            this.btnDong.Location = new System.Drawing.Point(438, 43);
             this.btnDong.Name = "btnDong";
-            this.btnDong.Size = new System.Drawing.Size(103, 40);
+            this.btnDong.Size = new System.Drawing.Size(173, 40);
             this.btnDong.TabIndex = 15;
             this.btnDong.Text = "&Đóng";
             this.btnDong.UseVisualStyleBackColor = true;
@@ -139,9 +125,9 @@
             // 
             this.btnLuuHoaDon.Image = ((System.Drawing.Image)(resources.GetObject("btnLuuHoaDon.Image")));
             this.btnLuuHoaDon.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnLuuHoaDon.Location = new System.Drawing.Point(295, 43);
+            this.btnLuuHoaDon.Location = new System.Drawing.Point(227, 43);
             this.btnLuuHoaDon.Name = "btnLuuHoaDon";
-            this.btnLuuHoaDon.Size = new System.Drawing.Size(183, 40);
+            this.btnLuuHoaDon.Size = new System.Drawing.Size(173, 40);
             this.btnLuuHoaDon.TabIndex = 13;
             this.btnLuuHoaDon.Text = "&Lưu Hóa Đơn";
             this.btnLuuHoaDon.UseVisualStyleBackColor = true;
@@ -516,7 +502,6 @@
         private System.Windows.Forms.Button btnThemHoaDon;
         private System.Windows.Forms.Button btnLuuHoaDon;
         private System.Windows.Forms.Button btnDong;
-        private System.Windows.Forms.Button btnInHoaDon;
         private System.Windows.Forms.Label lblBangChu;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.ComboBox cboMaKhach;
@@ -540,7 +525,6 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.ComboBox cboMaHang;
         private System.Windows.Forms.DataGridView dgvHoaDon;
-        private System.Windows.Forms.TextBox txtGhiChu;
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.Button btnThem;
         private System.Windows.Forms.DateTimePicker dtpNgayBan;
@@ -551,5 +535,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column6;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
+        public System.Windows.Forms.TextBox txtGhiChu;
     }
 }
