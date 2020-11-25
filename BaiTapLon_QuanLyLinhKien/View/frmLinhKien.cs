@@ -162,6 +162,11 @@ namespace BaiTapLon_QuanLyLinhKien.View
 
         private void btnSua_Click(object sender, EventArgs e)
         {
+            txtTenLinhKien.Enabled = true;
+            cboLoaiLinhKien.Enabled = true;
+            txtSoLuong.Enabled = true;
+            txtDonGiaNhap.Enabled = true;
+            cboNhaCungCap.Enabled = true;
             string sql;
             if (tblH.Rows.Count == 0)
             {
@@ -186,10 +191,10 @@ namespace BaiTapLon_QuanLyLinhKien.View
                 cboLoaiLinhKien.Focus();
                 return;
             }
-            sql = "UPDATE tblLinhKien SET tenLinhKien=N'" + txtTenLinhKien.Text.Trim().ToString() + "',maLoaiLinhKien=N'" + cboLoaiLinhKien.SelectedValue.ToString() + "',soLuong=" + txtSoLuong.Text + ",donGia=" + txtDonGiaNhap.Text +",ngayNhap='" + dtpNgayNhap.Value.ToString() + "' WHERE maLinhKien=N'" + txtMaLinhKien.Text + "'";
+            sql = "UPDATE tblLinhKien SET tenLinhKien=N'" + txtTenLinhKien.Text.Trim().ToString() + "',maLoaiLinhKien=N'" + cboLoaiLinhKien.SelectedValue.ToString() + "',soLuong=" + txtSoLuong.Text + ",donGia=" + txtDonGiaNhap.Text +",ngayNhap='" + dtpNgayNhap.Value.ToString() + "', maNhaCungCap='" + cboNhaCungCap.SelectedValue.ToString() + "' WHERE maLinhKien=N'" + txtMaLinhKien.Text + "'";
             clsConnectDB.RunSQL(sql);
             LoadDataGridView();
-            ResetValues();
+            MessageBox.Show("Lưu thay đổi thành công", "Thông báo");
             btnBoQua.Enabled = false;
         }
 
@@ -236,7 +241,6 @@ namespace BaiTapLon_QuanLyLinhKien.View
 
             clsConnectDB.RunSQL(sql);
             LoadDataGridView();
-            //ResetValues();
             btnXoa.Enabled = true;
             btnThem.Enabled = true;
             btnSua.Enabled = true;
@@ -252,6 +256,11 @@ namespace BaiTapLon_QuanLyLinhKien.View
 
         private void dgvHang_CellClick(object sender, DataGridViewCellEventArgs e)
         {
+            txtTenLinhKien.Enabled = true;
+            cboLoaiLinhKien.Enabled = true;
+            txtSoLuong.Enabled = true;
+            txtDonGiaNhap.Enabled = true;
+            cboNhaCungCap.Enabled = true;
             string MaLoaiLinhKien;
             string sql;
             if (btnThem.Enabled == false)
@@ -271,6 +280,7 @@ namespace BaiTapLon_QuanLyLinhKien.View
             txtDonGiaNhap.Text = dgvHang.CurrentRow.Cells["DonGia"].Value.ToString();
             txtSoLuong.Text = dgvHang.CurrentRow.Cells["SoLuong"].Value.ToString();
             dtpNgayNhap.Value = Convert.ToDateTime(dgvHang.CurrentRow.Cells["NgayNhap"].Value.ToString());
+            cboNhaCungCap.Text = dgvHang.CurrentRow.Cells["TenNhaCungCap"].Value.ToString();
             btnSua.Enabled = true;
             btnXoa.Enabled = true;
             txtMaLinhKien.Enabled = false;
@@ -282,19 +292,21 @@ namespace BaiTapLon_QuanLyLinhKien.View
             string maLoaiLinhKien = "";
             if (treeView.SelectedNode != null)
             {
+                string sql;
                 if (treeView.SelectedNode.Level == 0)
                 {
                     maLoaiLinhKien = "";
+                    sql = "SELECT tblLinhKien.maLinhKien, tblLinhKien.tenLinhKien, tblLinhKien.donGia, tblLinhKien.ngayNhap, tblLinhKien.soLuong," +
+                " tblNhaCungCap.tenNhaCungCap, tblLoaiLinhKien.tenLoaiLinhKien from tblLinhKien inner join tblNhaCungCap on tblLinhKien.maNhaCungCap = tblNhaCungCap.maNhaCungCap" +
+                " inner join tblLoaiLinhKien on tblLinhKien.maLoaiLinhKien = tblLoaiLinhKien.maLoaiLinhKien";
                 }
                 else
                 {
                     maLoaiLinhKien = treeView.SelectedNode.Tag.ToString();
-                }
-
-                string sql;
-                sql = "SELECT tblLinhKien.maLinhKien, tblLinhKien.tenLinhKien, tblLinhKien.donGia, tblLinhKien.ngayNhap, tblLinhKien.soLuong," +
+                    sql = "SELECT tblLinhKien.maLinhKien, tblLinhKien.tenLinhKien, tblLinhKien.donGia, tblLinhKien.ngayNhap, tblLinhKien.soLuong," +
                     " tblNhaCungCap.tenNhaCungCap, tblLoaiLinhKien.tenLoaiLinhKien from tblLinhKien inner join tblNhaCungCap on tblLinhKien.maNhaCungCap = tblNhaCungCap.maNhaCungCap" +
                     " inner join tblLoaiLinhKien on tblLinhKien.maLoaiLinhKien = tblLoaiLinhKien.maLoaiLinhKien where tblLoaiLinhKien.maLoaiLinhKien='" + maLoaiLinhKien + "'";
+                }
                 tblH = clsConnectDB.GetDataToTable(sql);
                 dgvHang.DataSource = tblH;
                 dgvHang.Columns[0].HeaderText = "Mã Linh Kiện";

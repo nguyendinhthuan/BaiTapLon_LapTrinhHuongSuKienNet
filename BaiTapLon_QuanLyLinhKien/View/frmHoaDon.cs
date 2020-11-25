@@ -74,6 +74,7 @@ namespace BaiTapLon_QuanLyLinhKien.View
 
         private void btnThemHoaDon_Click(object sender, EventArgs e)
         {
+            btnThem.Enabled = true;
             btnLuuHoaDon.Enabled = true;
             btnInHoaDon.Enabled = false;
             btnThemHoaDon.Enabled = false;
@@ -146,13 +147,7 @@ namespace BaiTapLon_QuanLyLinhKien.View
 
         private void btnDong_Click(object sender, EventArgs e)
         {
-            DialogResult dr;
-            dr = MessageBox.Show("Bạn có muốn thoát khỏi chương trình không ?", "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            if (dr == DialogResult.Yes)
-            {
-                Application.Exit();
-            }
-            
+            this.Close();      
         }
 
         private void cboMaKhach_TextChanged(object sender, EventArgs e)
