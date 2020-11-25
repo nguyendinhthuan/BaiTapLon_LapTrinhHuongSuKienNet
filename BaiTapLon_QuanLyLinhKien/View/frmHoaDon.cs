@@ -31,13 +31,19 @@ namespace BaiTapLon_QuanLyLinhKien.View
             btnThemHoaDon.Enabled = true;
             btnLuuHoaDon.Enabled = false;
             btnInHoaDon.Enabled = false;
-            txtDiaChi.ReadOnly = true;
-            txtSDT.ReadOnly = true;
-            txtDonGia.ReadOnly = true;
-            txtThanhTien.ReadOnly = true;
+            btnThem.Enabled = false;
             txtThanhTien.Text = "0";
             txtGiamGia.Text = "0";
-            
+            cboMaNhanVien.Enabled = false;
+            cboMaKhach.Enabled = false;
+            cboMaHang.Enabled = false;
+            txtDiaChi.Enabled = false;
+            txtSDT.Enabled = false;
+            txtGhiChu.Enabled = false;
+            txtDonGia.Enabled = false;
+            txtThanhTien.Enabled = false;
+            txtSoLuong.Enabled = false;
+            txtGiamGia.Enabled = false;
 
             sql = "SELECT maKhachHang, tenKhachHang, diaChi FROM tblKhachHang";
             tblChiTietHoaDon = clsConnectDB.GetDataToTable(sql);
@@ -71,6 +77,12 @@ namespace BaiTapLon_QuanLyLinhKien.View
             btnLuuHoaDon.Enabled = true;
             btnInHoaDon.Enabled = false;
             btnThemHoaDon.Enabled = false;
+            cboMaNhanVien.Enabled = true;
+            cboMaKhach.Enabled = true;
+            cboMaHang.Enabled = true;
+            txtGhiChu.Enabled = true;
+            txtSoLuong.Enabled = true;
+            txtGiamGia.Enabled = true;
             ResetValues();
         }
         private void ResetValues()
