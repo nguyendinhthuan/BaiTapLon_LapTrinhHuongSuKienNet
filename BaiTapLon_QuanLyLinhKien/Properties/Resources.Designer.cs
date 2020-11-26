@@ -69,5 +69,25 @@ namespace BaiTapLon_QuanLyLinhKien.Properties {
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Light_Grey_Background_Design_4 {
+            get {
+                object obj = ResourceManager.GetObject("Light-Grey-Background-Design-4", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Login_pic {
+            get {
+                object obj = ResourceManager.GetObject("Login_pic", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
     }
 }

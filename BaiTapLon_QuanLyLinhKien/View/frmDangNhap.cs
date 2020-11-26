@@ -47,7 +47,10 @@ namespace BaiTapLon_QuanLyLinhKien.View
             }
             else
             {
-                MessageBox.Show("Vui lòng điền thông tin đăng nhập!");
+                lblCorrect.Text = "Nhập sai tên tài khoản và mật khẩu";
+                txtTaiKhoan.Text = "";
+                txtMatKhau.Text = "";
+                txtTaiKhoan.Focus();
             }
 
             
