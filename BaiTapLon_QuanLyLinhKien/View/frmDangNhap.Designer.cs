@@ -61,16 +61,16 @@ namespace BaiTapLon_QuanLyLinhKien.View
             // 
             // txtTaiKhoan
             // 
-            this.txtTaiKhoan.Location = new System.Drawing.Point(153, 61);
-            this.txtTaiKhoan.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtTaiKhoan.Location = new System.Drawing.Point(153, 56);
+            this.txtTaiKhoan.Margin = new System.Windows.Forms.Padding(2);
             this.txtTaiKhoan.Name = "txtTaiKhoan";
             this.txtTaiKhoan.Size = new System.Drawing.Size(156, 20);
             this.txtTaiKhoan.TabIndex = 2;
             // 
             // txtMatKhau
             // 
-            this.txtMatKhau.Location = new System.Drawing.Point(153, 114);
-            this.txtMatKhau.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtMatKhau.Location = new System.Drawing.Point(153, 107);
+            this.txtMatKhau.Margin = new System.Windows.Forms.Padding(2);
             this.txtMatKhau.Name = "txtMatKhau";
             this.txtMatKhau.Size = new System.Drawing.Size(156, 20);
             this.txtMatKhau.TabIndex = 3;
@@ -89,8 +89,8 @@ namespace BaiTapLon_QuanLyLinhKien.View
             // ckbShowMatKhau
             // 
             this.ckbShowMatKhau.AutoSize = true;
-            this.ckbShowMatKhau.Location = new System.Drawing.Point(153, 152);
-            this.ckbShowMatKhau.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.ckbShowMatKhau.Location = new System.Drawing.Point(153, 147);
+            this.ckbShowMatKhau.Margin = new System.Windows.Forms.Padding(2);
             this.ckbShowMatKhau.Name = "ckbShowMatKhau";
             this.ckbShowMatKhau.Size = new System.Drawing.Size(109, 17);
             this.ckbShowMatKhau.TabIndex = 5;
@@ -100,8 +100,8 @@ namespace BaiTapLon_QuanLyLinhKien.View
             // 
             // btnDangNhap
             // 
-            this.btnDangNhap.Location = new System.Drawing.Point(153, 206);
-            this.btnDangNhap.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnDangNhap.Location = new System.Drawing.Point(177, 190);
+            this.btnDangNhap.Margin = new System.Windows.Forms.Padding(2);
             this.btnDangNhap.Name = "btnDangNhap";
             this.btnDangNhap.Size = new System.Drawing.Size(85, 32);
             this.btnDangNhap.TabIndex = 6;
@@ -123,7 +123,7 @@ namespace BaiTapLon_QuanLyLinhKien.View
             this.Controls.Add(this.label2);
             this.Controls.Add(this.lblTaiKhoan);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.MaximizeBox = false;
             this.Name = "frmDangNhap";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
